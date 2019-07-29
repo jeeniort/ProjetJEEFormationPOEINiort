@@ -9,4 +9,13 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description>Paramétrage d'une JSP accueil présente dans le répertoire WEB-INF</description>
+    <servlet-name>AccueilJSP</servlet-name>
+    <jsp-file>/WEB-INF/AccueilJSP.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccueilJSP</servlet-name>
+    <url-pattern>/Accueil</url-pattern>
+  </servlet-mapping>
 </web-app>
