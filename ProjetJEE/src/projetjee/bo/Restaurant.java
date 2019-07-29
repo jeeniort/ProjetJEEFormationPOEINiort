@@ -26,6 +26,12 @@ public class Restaurant
 		this.setAdresse(adresse);
 		this.setPhoto(photo);
 	}
+	
+	public Restaurant (String nom, String adresse)
+	{
+		this.setNom(nom);
+		this.setAdresse(adresse);
+	}
 
 	public int getId() 
 	{
