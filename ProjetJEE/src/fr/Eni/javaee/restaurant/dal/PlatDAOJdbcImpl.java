@@ -61,24 +61,30 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 	@Override
 	public List<Plat> selectAll() throws BusinessException {
 		List<Plat> listePlats = new ArrayList<Plat>();
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmt = cnx.prepareStatement(reqSql_selectAll);
-			ResultSet rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				listePlats.add(new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9)));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			if (e.getMessage().contains("CK_AVIS_note")) {
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
-			} else {
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
-			throw businessException;
-		}
+		listePlats.add(new Plat(1, 10, "Crepe", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
+				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg"));
+		listePlats.add(new Plat(2, 10, "Crepe", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
+				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg"));
+		listePlats.add(new Plat(3, 10, "Crepe", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
+				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg"));
+		listePlats.add(new Plat(4, 10, "Crepe", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
+				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg"));
+
+		/*
+		 * try (Connection cnx = ConnectionProvider.getConnection()) { PreparedStatement
+		 * pstmt = cnx.prepareStatement(reqSql_selectAll); ResultSet rs =
+		 * pstmt.executeQuery();
+		 * 
+		 * while (rs.next()) { listePlats.add(new Plat(rs.getInt(1), rs.getFloat(2),
+		 * rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
+		 * rs.getInt(7), rs.getString(8), rs.getString(9))); } } catch (Exception e) {
+		 * e.printStackTrace(); BusinessException businessException = new
+		 * BusinessException(); if (e.getMessage().contains("CK_AVIS_note")) {
+		 * businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC); }
+		 * else { businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+		 * } throw businessException; }
+		 */
 		return listePlats;
 	}
 
@@ -108,7 +114,12 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 
 	@Override
 	public Plat getPlatById(int idPlat) throws BusinessException {
-		Plat plat = null;
+		Plat plat = new Plat(4, 10, "Crepe de test", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
+				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg");
+		
+		
+		/*
+		
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(reqSql_getPlatByIdPlat);
 			ResultSet rs = pstmt.executeQuery();
@@ -116,6 +127,7 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 			if (rs.next()) {
 				plat = new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9));
+				System.out.println(rs.getInt(1));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,7 +138,8 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
 			}
 			throw businessException;
-		}
+		}*/
+		System.out.println("Retour BDD "+plat.toString());
 		return plat;
 	}
 

@@ -125,7 +125,7 @@ public class Plat implements Serializable {
 	public String toString() {
 		return "Plat [id=" + id + ", prix=" + prix + ", nom=" + nom + ", presentation=" + presentation + ", niveau="
 				+ niveau + ", cout=" + cout + ", nbConvive=" + nbConvive + ", listIngredient=" + listIngredient
-				+ ", imageURL=" + imageURL + "]";
+				+ ", imageURL=" + imageURL + "]\n";
 	}
 
 
