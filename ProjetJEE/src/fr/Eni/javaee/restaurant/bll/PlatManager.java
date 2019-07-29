@@ -12,10 +12,8 @@ public class PlatManager {
 
 	private PlatDAO platDAO;
 	private UtilisateurManager utilisateurManager = new UtilisateurManager();
-	private CommentaireManager commentaireManager = new CommentaireManager();
 
 	public PlatManager() {
-
 		this.platDAO = DAOFactory.getPlatDAO();
 	}
 
