@@ -3,12 +3,14 @@ package fr.Eni.javaee.restaurant.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.Eni.javaee.restaurant.BusinessException;
 import fr.Eni.javaee.restaurant.bo.Commentaire;
 import fr.Eni.javaee.restaurant.bo.Plat;
+import fr.Eni.javaee.restaurant.bo.Utilisateur;
 
 public class PlatDAOJdbcImpl implements PlatDAO {
 	// Requete SQL pour la méthod Insert
@@ -91,55 +93,53 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 	@Override
 	public List<Commentaire> getListeCommentaireByIdPlat(int idPlat) throws BusinessException {
 		List<Commentaire> listeCommentaires = new ArrayList<Commentaire>();
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmt = cnx.prepareStatement(reqSql_getListeCommentaireByIdPlat);
-			ResultSet rs = pstmt.executeQuery();
+		Utilisateur utilisateur = new Utilisateur();
+		Plat plat = new Plat();
+		if (idPlat == 4)
+			listeCommentaires.add(new Commentaire(1, 5, "C'etait bien", utilisateur, plat, LocalDateTime.now()));
 
-			while (rs.next()) {
-				listeCommentaires.add(new Commentaire(rs.getInt(1), rs.getInt(2), rs.getString(3),
-						rs.getTimestamp(6).toLocalDateTime()));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			if (e.getMessage().contains("CK_AVIS_note")) {
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
-			} else {
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
-			throw businessException;
-		}
+		/*
+		 * try (Connection cnx = ConnectionProvider.getConnection()) { PreparedStatement
+		 * pstmt = cnx.prepareStatement(reqSql_getListeCommentaireByIdPlat); ResultSet
+		 * rs = pstmt.executeQuery();
+		 * 
+		 * while (rs.next()) { listeCommentaires.add(new Commentaire(rs.getInt(1),
+		 * rs.getInt(2), rs.getString(3), rs.getTimestamp(6).toLocalDateTime())); } }
+		 * catch (Exception e) { e.printStackTrace(); BusinessException
+		 * businessException = new BusinessException(); if
+		 * (e.getMessage().contains("CK_AVIS_note")) {
+		 * businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC); }
+		 * else { businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+		 * } throw businessException; }
+		 */
 		return listeCommentaires;
 	}
 
 	@Override
 	public Plat getPlatById(int idPlat) throws BusinessException {
-		Plat plat = new Plat(4, 10, "Crepe de test", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
-				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg");
-		
-		
-		/*
-		
-		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement pstmt = cnx.prepareStatement(reqSql_getPlatByIdPlat);
-			ResultSet rs = pstmt.executeQuery();
+		Plat plat = new Plat();
+		if (idPlat == 4) {
+			plat = new Plat(4, 10, "Crepe de test", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
+					"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg");
+		}
 
-			if (rs.next()) {
-				plat = new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9));
-				System.out.println(rs.getInt(1));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			if (e.getMessage().contains("CK_AVIS_note")) {
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
-			} else {
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-			}
-			throw businessException;
-		}*/
-		System.out.println("Retour BDD "+plat.toString());
+		/*
+		 * 
+		 * try (Connection cnx = ConnectionProvider.getConnection()) { PreparedStatement
+		 * pstmt = cnx.prepareStatement(reqSql_getPlatByIdPlat); ResultSet rs =
+		 * pstmt.executeQuery();
+		 * 
+		 * if (rs.next()) { plat = new Plat(rs.getInt(1), rs.getFloat(2),
+		 * rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
+		 * rs.getInt(7), rs.getString(8), rs.getString(9));
+		 * System.out.println(rs.getInt(1)); } } catch (Exception e) {
+		 * e.printStackTrace(); BusinessException businessException = new
+		 * BusinessException(); if (e.getMessage().contains("CK_AVIS_note")) {
+		 * businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC); }
+		 * else { businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+		 * } throw businessException; }
+		 */
+		System.out.println("Retour BDD " + plat.toString());
 		return plat;
 	}
 
