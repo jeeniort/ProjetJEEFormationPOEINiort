@@ -9,10 +9,27 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+
+  <servlet>
+    <servlet-name>connexion</servlet-name>
+    <jsp-file>/WEB-INF/jsp/connexion.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>connexion</servlet-name>
+    <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>inscription</servlet-name>
+    <jsp-file>/WEB-INF/jsp/inscription.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>inscription</servlet-name>
+    <url-pattern>/inscription</url-pattern>
+  </servlet-mapping>
+
       <servlet>
     <servlet-name>NosPlatsJSP</servlet-name>
     <jsp-file>/WEB-INF/jsp/NosPlats.jsp</jsp-file>
   </servlet>
-  
-  
+
 </web-app>
