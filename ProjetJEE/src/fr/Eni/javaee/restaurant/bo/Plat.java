@@ -17,6 +17,7 @@ public class Plat implements Serializable {
 	private String cout;
 	private int nbConvive;
 	private String listIngredient;
+	private String imageURL;
 
 	public int getId() {
 		return id;
@@ -82,33 +83,51 @@ public class Plat implements Serializable {
 		return prix;
 	}
 
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
 	public Plat() {
 		super();
 	}
 
 	public Plat(float prix, String nom, String presentation, String niveau, String cout, int nbConvive,
-			String listIngredient) {
-		super();
-		this.prix = prix;
-		this.nom = nom;
-		this.presentation = presentation;
-		this.niveau = niveau;
-		this.cout = cout;
-		this.nbConvive = nbConvive;
-		this.listIngredient = listIngredient;
+			String listIngredient, String imageURL) {
+		setPrix(prix);
+		setNom(nom);
+		setPresentation(presentation);
+		setNiveau(niveau);
+		setCout(cout);
+		setNbConvive(nbConvive);
+		setListIngredient(listIngredient);
+		setImageURL(imageURL);
+
 	}
 
 	public Plat(int id, float prix, String nom, String presentation, String niveau, String cout, int nbConvive,
-			String listIngredient) {
-		super();
-		this.id = id;
-		this.prix = prix;
-		this.nom = nom;
-		this.presentation = presentation;
-		this.niveau = niveau;
-		this.cout = cout;
-		this.nbConvive = nbConvive;
-		this.listIngredient = listIngredient;
+			String listIngredient, String imageURL) {
+		setId(id);
+		setPrix(prix);
+		setNom(nom);
+		setPresentation(presentation);
+		setNiveau(niveau);
+		setCout(cout);
+		setNbConvive(nbConvive);
+		setListIngredient(listIngredient);
+		setImageURL(imageURL);
 	}
+
+	@Override
+	public String toString() {
+		return "Plat [id=" + id + ", prix=" + prix + ", nom=" + nom + ", presentation=" + presentation + ", niveau="
+				+ niveau + ", cout=" + cout + ", nbConvive=" + nbConvive + ", listIngredient=" + listIngredient
+				+ ", imageURL=" + imageURL + "]";
+	}
+
+
 
 }
