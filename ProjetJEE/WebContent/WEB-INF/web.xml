@@ -29,6 +29,4 @@
     <servlet-name>NosPlatsJSP</servlet-name>
     <jsp-file>/WEB-INF/jsp/NosPlats.jsp</jsp-file>
   </servlet>
-  
-  
 </web-app>
