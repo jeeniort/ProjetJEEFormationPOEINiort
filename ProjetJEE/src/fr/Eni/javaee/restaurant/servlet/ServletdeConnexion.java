@@ -44,31 +44,36 @@ public class ServletdeConnexion extends HttpServlet {
 	
 	UtilisateurManager utilisateurmanager = new UtilisateurManager();
 	
-	if (utilisateurmanager.getUtilisateur(mail, mot_de_passe) == -1)
-	{
+	try {
+		if (utilisateurmanager.getUtilisateur(mail, mot_de_passe) == -1)
+		{
 //		int i=0;
-		String error = null;
-		// il ya erreur
-		error = "il y a une erreur";		
-		request.setAttribute("error", error);
-		tentative++;
-		if(tentative==3) {
-			tentative=0;
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
-			rd.forward(request, response);
-		}
+			String error = null;
+			// il ya erreur
+			error = "il y a une erreur";		
+			request.setAttribute("error", error);
+			tentative++;
+			if(tentative==3) {
+				tentative=0;
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Inscription.jsp");
+				rd.forward(request, response);
+			}
 
-		//erreur
-	}else
-	{
-		int idUtilisateur = 0;
-		//ok
-		try {
-			Utilisateur utilisateur = new Utilisateur(utilisateurmanager.selectUtilisateurByIdUtilisateur(idUtilisateur));
-		} catch (BusinessException e) {
-			
-			e.printStackTrace();
+			//erreur
+		}else
+		{
+			int idUtilisateur = 0;
+			//ok
+			try {
+				Utilisateur utilisateur = utilisateurmanager.selectUtilisateurByIdUtilisateur(idUtilisateur);
+			} catch (BusinessException e) {
+				
+				e.printStackTrace();
+			}
 		}
+	} catch (BusinessException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 		 
 			
@@ -76,7 +81,7 @@ public class ServletdeConnexion extends HttpServlet {
 		
 	
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
 		rd.forward(request, response);
 	}
 
