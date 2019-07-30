@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList,java.util.List"%>
 <%@ page import="fr.Eni.javaee.restaurant.bll.PlatManager"%>
@@ -15,6 +15,7 @@
 
 </head>
 <body class="container">
+	<%@ include file="entete.jsp" %>
 	<div class="col-8 offset-md-2 mt-4 mb-4">
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
@@ -61,15 +62,16 @@
 		</div>
 	</div>
 	<div id="PlatCarousel" class="col-8 offset-md-2 mt-4 mb-4"></div>
-	<script src="jquery/jquery.min.js"></script>
+	<%@ include file="piedDePage.html"%>
+	<script src="jquery/jquery.min.js" type="text/javascript"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous" type="text/javascript"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous" type="text/javascript"></script>
 	<script type="text/javascript">
 	let idAffiche = -1;
 		function AfficherDetail(idPlat) {			
@@ -124,5 +126,6 @@
 			}
 
 	</script>
+
 </body>
 </html>

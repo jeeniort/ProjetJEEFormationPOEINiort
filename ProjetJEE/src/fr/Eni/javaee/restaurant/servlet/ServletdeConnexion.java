@@ -33,7 +33,7 @@ public class ServletdeConnexion extends HttpServlet {
 		error = "il y a une erreur";		
 		request.setAttribute("error", error);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connection.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
 		rd.forward(request, response);
 	}
 

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="entete.jsp" %>
 <h1>Connexion</h1>
 <form action="<%=request.getContextPath()%>/ServletdeConnexion" method="post">
   <div class="form-group">
@@ -23,5 +24,6 @@
 <c:if test="${!empty error }">
 		<p>${error}</p>
 	</c:if>
+	<%@ include file="piedDePage.html" %>
 </body>
 </html>
