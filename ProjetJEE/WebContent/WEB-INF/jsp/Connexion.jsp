@@ -20,8 +20,8 @@
   </div>
   <button type="submit" class="btn btn-primary">Connexion</button>
 </form>
-<c:if test="${!empty error }">
+<!--<c:if test="${!empty error }">
 		<p>${error}</p>
-	</c:if>
+	</c:if>-->
 </body>
 </html>
