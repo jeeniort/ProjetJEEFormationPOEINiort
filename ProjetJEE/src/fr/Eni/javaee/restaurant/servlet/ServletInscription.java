@@ -1,4 +1,4 @@
-package fr.Eni.javaee.restaurant.servlets;
+package fr.Eni.javaee.restaurant.servlet;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ServletsRedirigeantVersPageInclue
+ * Servlet implementation class ServletInscription
  */
-@WebServlet("/ServletsRedirigeantVersPageInclue")
-public class ServletsRedirigeantVersPageInclue extends HttpServlet {
+@WebServlet("/ServletInscription")
+public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletsRedirigeantVersPageInclue() {
+    public ServletInscription() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,10 +28,10 @@ public class ServletsRedirigeantVersPageInclue extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/PageInclue.jsp");
-    			rd.forward(request, response);
-    		}
+   	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Inscription.jsp");
+       			rd.forward(request, response);
+       		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

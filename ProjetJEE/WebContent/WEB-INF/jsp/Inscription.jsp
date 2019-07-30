@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="entete.jsp"%>
 <h1>Inscription</h1>
 <form>
   <div class="form-group">
@@ -42,6 +43,7 @@
           
   </div>
 </form>
+<%@ include file="piedDePage.html"%>
 
 </body>
 </html>

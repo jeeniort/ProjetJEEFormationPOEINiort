@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.Eni.javaee.restaurant.BusinessException;
+import fr.Eni.javaee.restaurant.bll.PlatManager;
+import fr.Eni.javaee.restaurant.bo.Plat;
+
 /**
  * Servlet implementation class ServletRedirigeAjoutPlats
  */
@@ -29,7 +33,7 @@ public class ServletRedirigeAjoutPlats extends HttpServlet {
 	 */
     @Override
    	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ajouterunplat.jsp");
+       	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AjouterUnPlat.jsp");
        			rd.forward(request, response);
        		}
 
@@ -38,6 +42,13 @@ public class ServletRedirigeAjoutPlats extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PlatManager platmanager = new PlatManager();
+		try {
+			platmanager.insert(new Plat());
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		doGet(request, response);
 	}
 
