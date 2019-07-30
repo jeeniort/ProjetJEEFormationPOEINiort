@@ -55,7 +55,9 @@ public class ServletdeConnexion extends HttpServlet {
 			tentative++;
 			if(tentative==3) {
 				tentative=0;
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
+
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Inscription.jsp");
+
 				rd.forward(request, response);
 			}
 
@@ -81,7 +83,7 @@ public class ServletdeConnexion extends HttpServlet {
 		
 	
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
 		rd.forward(request, response);
 	}
 
