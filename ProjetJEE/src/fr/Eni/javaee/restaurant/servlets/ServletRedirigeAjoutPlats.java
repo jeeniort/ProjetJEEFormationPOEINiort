@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ServletNoPlats
+ * Servlet implementation class ServletRedirigeAjoutPlats
  */
-@WebServlet("/ServletNoPlats")
-public class ServletNoPlats extends HttpServlet {
+@WebServlet("/ServletRedirigeAjoutPlats")
+public class ServletRedirigeAjoutPlats extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletNoPlats() {
+    public ServletRedirigeAjoutPlats() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,10 +28,10 @@ public class ServletNoPlats extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/NoPlats.jsp");
-    			rd.forward(request, response);
-    		}
+   	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ajouterunplat.jsp");
+       			rd.forward(request, response);
+       		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
