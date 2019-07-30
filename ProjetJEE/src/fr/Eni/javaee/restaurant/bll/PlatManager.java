@@ -24,27 +24,23 @@ public class PlatManager {
 	}
 
 	public Plat SelectPlatByIdPlat(int idPlat) throws BusinessException {
-		Plat plat = null;
+		Plat plat;
 		plat = platDAO.getPlatById(idPlat);
-		System.out.println("Plat manager "+ plat.toString());
+		System.out.println("Plat manager " + plat.toString());
 		return plat;
 	}
-	
+
 	public List<Plat> SelectPlats() throws BusinessException {
 		List<Plat> listePlats = new ArrayList<Plat>();
 		listePlats = platDAO.selectAll();
 		System.out.println(listePlats.toString());
 		return listePlats;
-		
+
 	}
 
 	public List<Commentaire> selectCommentaireByIdPlat(int idPlat) throws BusinessException {
 		List<Commentaire> listeCommentaire = new ArrayList<Commentaire>();
 		listeCommentaire = platDAO.getListeCommentaireByIdPlat(idPlat);
-		for (Commentaire commentaire : listeCommentaire) {
-			commentaire.setPlat(SelectPlatByIdPlat(idPlat));
-			commentaire.setUtilisateur(utilisateurManager.selectUtilisateurByIdCommentaire(commentaire.getId()));
-		}
 		return listeCommentaire;
 	}
 

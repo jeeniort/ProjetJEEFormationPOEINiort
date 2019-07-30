@@ -1,6 +1,9 @@
 package fr.Eni.javaee.restaurant.bll;
 
+import java.util.List;
+
 import fr.Eni.javaee.restaurant.BusinessException;
+import fr.Eni.javaee.restaurant.bo.Commentaire;
 import fr.Eni.javaee.restaurant.bo.Utilisateur;
 import fr.Eni.javaee.restaurant.dal.DAOFactory;
 import fr.Eni.javaee.restaurant.dal.UtilisateurDAO;
@@ -21,17 +24,16 @@ public class UtilisateurManager {
 		return utilisateurDAO.selectUtilisateurById(idUtilisateur);
 	}
 
-	public Utilisateur selectUtilisateurByIdCommentaire(int idCommentaire) {
-		return utilisateurDAO.selectUtilisateurByIdCommentaire(idCommentaire);
+	public List<Commentaire> selectUtilisateurByIdCommentaire(int idCommentaire) throws BusinessException {
+		return utilisateurDAO.getCommentairesByIdUtilisateur(idCommentaire);
 	}
-	
-	public int getUtilisateur(String mail, String password)
-	
+
+	public int getUtilisateur(String mail, String password) throws BusinessException
 	{
 		int idUtilisateur = -1;
-		
-		
+		idUtilisateur = utilisateurDAO.getIdUtilisateurByMailPassword(mail, password) == 0 ? idUtilisateur
+				: utilisateurDAO.getIdUtilisateurByMailPassword(mail, password);
+
 		return idUtilisateur;
-		
 	}
 }

@@ -3,7 +3,6 @@ package fr.Eni.javaee.restaurant.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +12,18 @@ import fr.Eni.javaee.restaurant.bo.Plat;
 import fr.Eni.javaee.restaurant.bo.Utilisateur;
 
 public class PlatDAOJdbcImpl implements PlatDAO {
-	// Requete SQL pour la méthod Insert
-	private static final String reqSql_Insert = "INSERT INTO plat(prix,nom,presentation,niveau,cout,nbConvive,listIngredient,imageURL) VALUES(?,?,?,?,?,?,?,?)";
-	// Requete SQL pour la méthod reqSql_getListeCommentaireByIdPlat
-	private static final String reqSql_getListeCommentaireByIdPlat = "SELECT id_Aliment,libelle FROM aliment where id_aliment "
-			+ "in (select idaliment from repas_aliment where id_repas =?";
-	// Requete SQL pour la méthod SelectALL
-	private static final String reqSql_selectAll = "SELECT id,prix,nom,presentation,niveau,cout,nbConvive,listIngredient,imageURL FROM plat order by id";
-	// Requete SQL pour la méthod reqSql_getPlatByIdPlat
-	private static final String reqSql_getPlatByIdPlat = "SELECT id,prix,nom,presentation,niveau,cout,nbConvive,listIngredient,imageURL FROM plat where id=?";
+	// Requete SQL pour la mï¿½thod Insert
+	private static final String reqSql_Insert = "INSERT INTO plat(prix,nom,presentation,niveau,cout,nbconvive,listingredient,imageurl) VALUES(?,?,?,?,?,?,?,?)";
+	// Requete SQL pour la mï¿½thod reqSql_getListeCommentaireByIdPlat
+	private static final String reqSql_getListeCommentaireByIdPlat = "SELECT c.id_commentaire,c.note,c.commentaire,c.date, "
+			+ "		p.id_plat, p.prix, p.nom, p.presentation, p.niveau, p.cout, p.nbconvive, p.listingredient, p.imageurl,"
+			+ "		u.id_utilisateur, u.nom, u.prenom, u.email, u.commentaire" + "	" + "		FROM commentaire c "
+			+ "			inner join utilisateur u on u.id_utilisateur = c.id_utilisateur "
+			+ "			inner join plat p on p.id_plat = c.id_plat  " + "	" + "		WHERE c.id_plat =?";
+	// Requete SQL pour la mï¿½thod SelectALL
+	private static final String reqSql_selectAll = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,listIngredient,imageURL FROM plat order by id_plat";
+	// Requete SQL pour la mï¿½thod reqSql_getPlatByIdPlat
+	private static final String reqSql_getPlatByIdPlat = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,listingredient,imageurl FROM plat where id_plat=?";
 
 	@Override
 	public void insert(Plat plat) throws BusinessException {
@@ -64,81 +66,90 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 	public List<Plat> selectAll() throws BusinessException {
 		List<Plat> listePlats = new ArrayList<Plat>();
 
-		listePlats.add(new Plat(1, 10, "Crepe", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
-				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg"));
-		listePlats.add(new Plat(2, 10, "Crepe", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
-				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg"));
-		listePlats.add(new Plat(3, 10, "Crepe", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
-				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg"));
-		listePlats.add(new Plat(4, 10, "Crepe", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
-				"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg"));
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(reqSql_selectAll);
+			ResultSet rs = pstmt.executeQuery();
 
-		/*
-		 * try (Connection cnx = ConnectionProvider.getConnection()) { PreparedStatement
-		 * pstmt = cnx.prepareStatement(reqSql_selectAll); ResultSet rs =
-		 * pstmt.executeQuery();
-		 * 
-		 * while (rs.next()) { listePlats.add(new Plat(rs.getInt(1), rs.getFloat(2),
-		 * rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
-		 * rs.getInt(7), rs.getString(8), rs.getString(9))); } } catch (Exception e) {
-		 * e.printStackTrace(); BusinessException businessException = new
-		 * BusinessException(); if (e.getMessage().contains("CK_AVIS_note")) {
-		 * businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC); }
-		 * else { businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-		 * } throw businessException; }
-		 */
+			while (rs.next()) {
+				System.out.println("Id retour BDD " + rs.getInt(1));
+				listePlats.add(new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9)));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			if (e.getMessage().contains("CK_AVIS_note")) {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
+			} else {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			}
+			throw businessException;
+		}
+
 		return listePlats;
 	}
 
 	@Override
 	public List<Commentaire> getListeCommentaireByIdPlat(int idPlat) throws BusinessException {
 		List<Commentaire> listeCommentaires = new ArrayList<Commentaire>();
-		Utilisateur utilisateur = new Utilisateur();
-		Plat plat = new Plat();
-		if (idPlat == 4)
-			listeCommentaires.add(new Commentaire(1, 5, "C'etait bien", utilisateur, plat, LocalDateTime.now()));
 
-		/*
-		 * try (Connection cnx = ConnectionProvider.getConnection()) { PreparedStatement
-		 * pstmt = cnx.prepareStatement(reqSql_getListeCommentaireByIdPlat); ResultSet
-		 * rs = pstmt.executeQuery();
-		 * 
-		 * while (rs.next()) { listeCommentaires.add(new Commentaire(rs.getInt(1),
-		 * rs.getInt(2), rs.getString(3), rs.getTimestamp(6).toLocalDateTime())); } }
-		 * catch (Exception e) { e.printStackTrace(); BusinessException
-		 * businessException = new BusinessException(); if
-		 * (e.getMessage().contains("CK_AVIS_note")) {
-		 * businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC); }
-		 * else { businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-		 * } throw businessException; }
-		 */
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(reqSql_getListeCommentaireByIdPlat);
+			pstmt.setInt(1, idPlat);
+			ResultSet rs = pstmt.executeQuery();
+			Plat newPlat = null;
+			while (rs.next()) {
+				if (newPlat == null) {
+					newPlat = new Plat(rs.getInt(5), rs.getFloat(6), rs.getString(7), rs.getString(8), rs.getString(9),
+							rs.getString(10), rs.getInt(11), rs.getString(12), rs.getString(13));
+					System.out.println("newPlat pour l'id " + idPlat + " : \n" + newPlat.toString());
+				}
+				Utilisateur newUtilisateur = new Utilisateur(rs.getInt(14), rs.getString(15), rs.getString(16),
+						rs.getString(17), rs.getString(18));
+				System.out.println(
+						"newUtilisateur du commentaire pour l'id plat " + idPlat + " : \n" + newUtilisateur.toString());
+				listeCommentaires.add(new Commentaire(rs.getInt(1), rs.getInt(2), rs.getString(3), newUtilisateur,
+						newPlat, rs.getTimestamp(4).toLocalDateTime()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			if (e.getMessage().contains("CK_AVIS_note")) {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
+			} else {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			}
+			throw businessException;
+		}
+		System.out.println("Liste des commentaires pour l'id " + idPlat + " : \n" + listeCommentaires.toString());
 		return listeCommentaires;
 	}
 
 	@Override
 	public Plat getPlatById(int idPlat) throws BusinessException {
 		Plat plat = new Plat();
-		if (idPlat == 4) {
-			plat = new Plat(4, 10, "Crepe de test", "Cuite sur la Kampouz de Bécassine", "facile", "bon marché", 12,
-					"3 oeufs&&250g de farine&&Vanille&&Sel&&6dl de lait&&Extrai de vanille", "crepes.jpg");
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(reqSql_getPlatByIdPlat);
+			pstmt.setInt(1, idPlat);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				plat = new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9));
+				System.out.println(rs.getInt(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			if (e.getMessage().contains("CK_AVIS_note")) {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
+			} else {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			}
+			throw businessException;
 		}
 
-		/*
-		 * 
-		 * try (Connection cnx = ConnectionProvider.getConnection()) { PreparedStatement
-		 * pstmt = cnx.prepareStatement(reqSql_getPlatByIdPlat); ResultSet rs =
-		 * pstmt.executeQuery();
-		 * 
-		 * if (rs.next()) { plat = new Plat(rs.getInt(1), rs.getFloat(2),
-		 * rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
-		 * rs.getInt(7), rs.getString(8), rs.getString(9));
-		 * System.out.println(rs.getInt(1)); } } catch (Exception e) {
-		 * e.printStackTrace(); BusinessException businessException = new
-		 * BusinessException(); if (e.getMessage().contains("CK_AVIS_note")) {
-		 * businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC); }
-		 * else { businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
-		 * } throw businessException; }
-		 */
 		System.out.println("Retour BDD " + plat.toString());
 		return plat;
 	}

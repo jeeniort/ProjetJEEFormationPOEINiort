@@ -20,5 +20,10 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int INSERT_AVIS_NOTE_ECHEC=10002;
 	
+	/**
+	 * Echec de la suppression d'un commentaire
+	 */
+	public static final int DELETE_AVIS_ECHEC=30001;
+	
 	
 }
