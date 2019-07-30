@@ -15,7 +15,7 @@
 
 </head>
 <body class="container">
-	<%@ include file="entete.jsp" %>
+	<%@ include file="entete.jsp"%>
 	<div class="col-8 offset-md-2 mt-4 mb-4">
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
@@ -62,6 +62,7 @@
 		</div>
 	</div>
 	<div id="PlatCarousel" class="col-8 offset-md-2 mt-4 mb-4"></div>
+	<div id="CommentaireCarousel" class="col-8 offset-md-2 mt-4 mb-4"></div>
 	<%@ include file="piedDePage.html"%>
 	<script src="jquery/jquery.min.js" type="text/javascript"></script>
 	<script
@@ -72,60 +73,7 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous" type="text/javascript"></script>
-	<script type="text/javascript">
-	let idAffiche = -1;
-		function AfficherDetail(idPlat) {			
-			$.getJSON("${pageContext.request.contextPath}"+"/rest/plats/"+idPlat, function(data){
-				if(idAffiche != -1)
-					{
-						$("#PlatCarousel").empty();
-					}
-				if(data.id != 0 && idAffiche != data.id)
-					{
-						$("#PlatCarousel").empty();
-						idAffiche = data.id;
-						ajouterBaliseCom(data);
-					}
-				else
-					{
-					idAffiche = -1;
-					}
-			});
-			
-		}
-		
-		
-		function ajouterBaliseCom(data) {
-			var listIngredientHTML = "";
-			var listIngredientTab = data.listIngredient.split('&&');
-	
-
-		    for(var i=0;i<listIngredientTab.length;i++)
-		    	{
-		    	listIngredientHTML = listIngredientHTML + '	<div class="col-12">'  +listIngredientTab[i] + '</div>';
-		    	}
-		   
-			
-			
-			var newContent = '<div class="col-md-12 note" id="card' + data.id + '">' +
-			'	<div class="card">' +
-			'	<div class="card-header">' +
-			'	<h3><u>' + data.nom + '</u></h3>' +
-			'	<div class="col-12">'  + data.presentation + '</div>' +
-			'	<div class="col-10">Niveau '  + data.niveau + ' et '+data.cout + '. Pour '  + data.nbConvive + ' personnes.</div>' +
-			'	<p><u>Prix restaurant : ' + data.prix +' euros</u></p>' +
-			'	</div>' +
-			'	<div class="card-body">' +
-				listIngredientHTML +
-			'	</div>' +
-			'	<div class="card-footer">' +
-			'	</div>' +
-			'	</div>' +
-			'</div>';
-			$("#PlatCarousel").append(newContent);
-			}
-
-	</script>
+	<script	src="${pageContext.request.contextPath}/js/nosplat.js" type="text/javascript"></script>
 
 </body>
 </html>

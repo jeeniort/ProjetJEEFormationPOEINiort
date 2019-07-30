@@ -55,7 +55,9 @@ public class ServletdeConnexion extends HttpServlet {
 			tentative++;
 			if(tentative==3) {
 				tentative=0;
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
+
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Inscription.jsp");
+
 				rd.forward(request, response);
 			}
 
@@ -65,14 +67,14 @@ public class ServletdeConnexion extends HttpServlet {
 			int idUtilisateur = 0;
 			//ok
 			try {
-				Utilisateur utilisateur =utilisateurmanager.selectUtilisateurByIdUtilisateur(idUtilisateur);
+				Utilisateur utilisateur = utilisateurmanager.selectUtilisateurByIdUtilisateur(idUtilisateur);
 			} catch (BusinessException e) {
 				
 				e.printStackTrace();
 			}
 		}
 	} catch (BusinessException e) {
-		
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 		 
@@ -81,7 +83,7 @@ public class ServletdeConnexion extends HttpServlet {
 		
 	
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
 		rd.forward(request, response);
 	}
 
@@ -94,3 +96,4 @@ public class ServletdeConnexion extends HttpServlet {
 	}
 
 }
+

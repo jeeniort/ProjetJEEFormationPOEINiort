@@ -21,7 +21,7 @@
 	
 		<div class="row">
 
-			<div class="rounded float-left"  style="margin-left:90px">
+			<div class="rounded float-left"  style="margin:auto">
 				<img src="image/menu-restaurant-vintage-table.jpg"
 					alt="Responsive image">
 
@@ -33,7 +33,7 @@
 					allowfullscreen></iframe>
 			</div>
 			
-			<div class="rounded float-right" style="margin-left:120px">
+			<div class="rounded float-right"style="margin:auto">
 				<img src="image/menu-restaurant-vintage-table.jpg"
 					alt="Responsive image">
 

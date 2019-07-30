@@ -4,9 +4,9 @@
 
 
 
-	<div class="fixed-top">
+	<div >
 		<nav class="navbar navbar-expand-lg navbar-light bg-info"> <a
-			class="navbar-brand" href="#">RESTAURANT</a>
+			class="navbar-brand" href='<%=request.getContextPath() + "/RedirigeAccueil"%>'>RESTAURANT</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -15,21 +15,20 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link"
-					href='<%=request.getContextPath() + "/NosPlats"%>' target="blank">Nos
+					href='<%=request.getContextPath() + "/NosPlats"%>' >Nos
 						plats<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href='<%=request.getContextPath() + ""%>' target="blank">Ajout
-						plats</a></li>
+					href='<%=request.getContextPath() + "/ServletRedirigeAjoutPlats"%>' >Ajouter plats</a></li>
+					
 				<li class="nav-item"><a class="nav-link"
-					href='<%=request.getContextPath() + "/ServletdeConnexion"%>'
-					target="blank">Connection</a></li>
+					href='<%=request.getContextPath() + "/ServletdeConnexion"%>'>Connection</a></li>
+					
 				<li class="nav-item"><a class="nav-link "
-					href='<%=request.getContextPath() + ""%>' target="blank">Inscription</a>
-				</li>
+					href='<%=request.getContextPath() + "/ServletInscription"%>' >Inscription</a></li>
 
 				<li class="nav-item"><a class="nav-link "
-					href='<%=request.getContextPath() + ""%>' target="blank">Mon
+					href='<%=request.getContextPath() + ""%>' >Mon
 						compte</a></li>
 			</ul>
 
@@ -37,10 +36,10 @@
 
 		<div>
 			<button type="submit" class="btn btn-dark"
-				href='<%=request.getContextPath() + ""%>' target="blank">Se
+				href='<%=request.getContextPath() + "/ServletdeConnexion"%>' >Se
 				connecter</button>
 			<button type="submit" class="btn btn-dark"
-				href='<%=request.getContextPath() + ""%>' target="blank">S'inscrire</button>
+				href='<%=request.getContextPath() + "/ServletInscription"%>'>S'inscrire</button>
 
 
 		</div>
