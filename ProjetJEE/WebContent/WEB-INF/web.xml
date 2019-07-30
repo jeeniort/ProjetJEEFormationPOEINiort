@@ -29,4 +29,13 @@
     <servlet-name>NosPlatsJSP</servlet-name>
     <jsp-file>/WEB-INF/jsp/NosPlats.jsp</jsp-file>
   </servlet>
+  <servlet>
+    <servlet-name>MonCompte</servlet-name>
+    <jsp-file>/WEB-INF/jsp/MonCompte.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MonCompte</servlet-name>
+    <url-pattern>/MonCompte</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
