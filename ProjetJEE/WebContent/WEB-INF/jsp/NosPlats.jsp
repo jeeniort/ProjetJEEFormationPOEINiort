@@ -15,7 +15,7 @@
 
 </head>
 <body class="container">
-	<div id ="PlatCarousel" class="col-8 offset-md-2 mt-4">
+	<div class="col-8 offset-md-2 mt-4 mb-4">
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -60,7 +60,7 @@
 			</a>
 		</div>
 	</div>
-
+	<div id="PlatCarousel" class="col-8 offset-md-2 mt-4 mb-4"></div>
 	<script src="jquery/jquery.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -71,44 +71,58 @@
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		function AfficherDetail(idPlat) {
-			
-			console.log(idPlat);
-			
-			
-			
-			
+	let idAffiche = -1;
+		function AfficherDetail(idPlat) {			
 			$.getJSON("${pageContext.request.contextPath}"+"/rest/plats/"+idPlat, function(data){
-				
-				$.each(data, function(){
-					ajouterBaliseNote(this);
-				});
+				if(idAffiche != -1)
+					{
+						$("#PlatCarousel").empty();
+					}
+				if(data.id != 0 && idAffiche != data.id)
+					{
+						$("#PlatCarousel").empty();
+						idAffiche = data.id;
+						ajouterBaliseCom(data);
+					}
+				else
+					{
+					idAffiche = -1;
+					}
 			});
 			
 		}
 		
 		
-		function ajouterBaliseNote(plat) {
-			var newContent = '<div class="col-md-4 note" id="card' + plat.id + '">' +
+		function ajouterBaliseCom(data) {
+			var listIngredientHTML = "";
+			var listIngredientTab = data.listIngredient.split('&&');
+	
+
+		    for(var i=0;i<listIngredientTab.length;i++)
+		    	{
+		    	listIngredientHTML = listIngredientHTML + '	<div class="col-12">'  +listIngredientTab[i] + '</div>';
+		    	}
+		   
+			
+			
+			var newContent = '<div class="col-md-12 note" id="card' + data.id + '">' +
 			'	<div class="card">' +
 			'	<div class="card-header">' +
-			'	<h3>' + plat.nom + '</h3>' +
+			'	<h3><u>' + data.nom + '</u></h3>' +
+			'	<div class="col-12">'  + data.presentation + '</div>' +
+			'	<div class="col-10">Niveau '  + data.niveau + ' et '+data.cout + '. Pour '  + data.nbConvive + ' personnes.</div>' +
+			'	<p><u>Prix restaurant : ' + data.prix +' euros</u></p>' +
 			'	</div>' +
 			'	<div class="card-body">' +
-			'	<textarea id="txt' + plat.id + '" class="col-12" onkeyup="updateNote(' + plat.id + ')">'  + plat.presentation + '</textarea>' +
+				listIngredientHTML +
 			'	</div>' +
 			'	<div class="card-footer">' +
 			'	</div>' +
 			'	</div>' +
 			'</div>';
-
 			$("#PlatCarousel").append(newContent);
 			}
 
-
-		// grace a l'id IDELEMENT
-		// REquete Javascript pour recuperer les informations du plats
-		// + RFecuperation de ses avis, note moyenne
 	</script>
 </body>
 </html>

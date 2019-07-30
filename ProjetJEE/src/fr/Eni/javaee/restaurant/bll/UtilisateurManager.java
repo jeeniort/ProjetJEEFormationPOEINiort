@@ -24,4 +24,14 @@ public class UtilisateurManager {
 	public Utilisateur selectUtilisateurByIdCommentaire(int idCommentaire) {
 		return utilisateurDAO.selectUtilisateurByIdCommentaire(idCommentaire);
 	}
+	
+	public int getUtilisateur(String mail, String password)
+	
+	{
+		int idUtilisateur = -1;
+		
+		
+		return idUtilisateur;
+		
+	}
 }
