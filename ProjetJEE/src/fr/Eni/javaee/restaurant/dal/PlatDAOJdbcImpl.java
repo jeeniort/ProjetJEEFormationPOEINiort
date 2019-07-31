@@ -12,18 +12,18 @@ import fr.Eni.javaee.restaurant.bo.Plat;
 import fr.Eni.javaee.restaurant.bo.Utilisateur;
 
 public class PlatDAOJdbcImpl implements PlatDAO {
-	// Requete SQL pour la m�thod Insert
+	// Requete SQL pour la method Insert
 	private static final String reqSql_Insert = "INSERT INTO plat(prix,nom,presentation,niveau,cout,nbconvive,listingredient,imageurl) VALUES(?,?,?,?,?,?,?,?)";
-	// Requete SQL pour la m�thod reqSql_getListeCommentaireByIdPlat
+	// Requete SQL pour la method reqSql_getListeCommentaireByIdPlat
 	private static final String reqSql_getListeCommentaireByIdPlat = "SELECT c.id_commentaire,c.note,c.commentaire,c.date, "
-			+ "		p.id_plat, p.prix, p.nom, p.presentation, p.niveau, p.cout, p.nbconvive,p.nbcommande, p.listingredient, p.imageurl,"
+			+ "		p.id_plat, p.prix, p.nom, p.presentation, p.niveau, p.cout, p.nbconvive, p.nbcommande, p.listingredient, p.imageurl,"
 			+ "		u.id_utilisateur, u.nom, u.prenom, u.email, u.commentaire" + "	" + "		"
 			+ "		FROM commentaire c "
 			+ "			inner join utilisateur u on u.id_utilisateur = c.id_utilisateur "
 			+ "			inner join plat p on p.id_plat = c.id_plat  " + "	" + "		WHERE c.id_plat =?";
-	// Requete SQL pour la m�thod SelectALL
+	// Requete SQL pour la method SelectALL
 	private static final String reqSql_selectAll = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,nbcommande,listIngredient,imageURL FROM plat order by id_plat";
-	// Requete SQL pour la m�thod reqSql_getPlatByIdPlat
+	// Requete SQL pour la method reqSql_getPlatByIdPlat
 	private static final String reqSql_getPlatByIdPlat = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,nbcommande,listingredient,imageurl FROM plat where id_plat=?";
 
 	@Override
@@ -101,13 +101,22 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 			ResultSet rs = pstmt.executeQuery();
 			Plat newPlat = null;
 			while (rs.next()) {
+				
+	/*			private static final String reqSql_getListeCommentaireByIdPlat = "SELECT c.id_commentaire,c.note,c.commentaire,c.date, "
+						+ "		p.id_plat, p.prix, p.nom, p.presentation, p.niveau, p.cout, p.nbconvive, p.nbcommande, p.listingredient, p.imageurl,"
+						+ "		u.id_utilisateur, u.nom, u.prenom, u.email, u.commentaire" + "	" + "		"
+						+ "		FROM commentaire c "
+						+ "			inner join utilisateur u on u.id_utilisateur = c.id_utilisateur "
+						+ "			inner join plat p on p.id_plat = c.id_plat  " + "	" + "		WHERE c.id_plat =?";*/
+				
+				
 				if (newPlat == null) {
-					newPlat = new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
-							rs.getString(6), rs.getInt(7),rs.getInt(8), rs.getString(9), rs.getString(10));
+					newPlat = new Plat(rs.getInt(5), rs.getFloat(6), rs.getString(7), rs.getString(8), rs.getString(9),
+							rs.getString(10), rs.getInt(11),rs.getInt(12), rs.getString(13), rs.getString(14));
 					System.out.println("newPlat pour l'id " + idPlat + " : \n" + newPlat.toString());
 				}
-				Utilisateur newUtilisateur = new Utilisateur(rs.getInt(14), rs.getString(15), rs.getString(16),
-						rs.getString(17), rs.getString(18));
+				Utilisateur newUtilisateur = new Utilisateur(rs.getInt(15), rs.getString(16), rs.getString(17),
+						rs.getString(18), rs.getString(19));
 				System.out.println(
 						"newUtilisateur du commentaire pour l'id plat " + idPlat + " : \n" + newUtilisateur.toString());
 				listeCommentaires.add(new Commentaire(rs.getInt(1), rs.getInt(2), rs.getString(3), newUtilisateur,
