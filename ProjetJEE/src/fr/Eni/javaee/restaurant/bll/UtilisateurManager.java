@@ -34,8 +34,4 @@ public class UtilisateurManager {
 				: utilisateurDAO.getIdUtilisateurByMailPassword(mail, password);
 		return idUtilisateur;
 	}
-	
-	public void getRoles(Utilisateur utilisateur) throws BusinessException {
-		utilisateurDAO.selectRolesByIdUtilisateur(utilisateur);
-	}	
 }
