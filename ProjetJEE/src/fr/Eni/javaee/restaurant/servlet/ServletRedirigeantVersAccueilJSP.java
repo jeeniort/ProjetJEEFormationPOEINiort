@@ -1,4 +1,4 @@
-package fr.Eni.javaee.restaurant.servlets;
+package fr.Eni.javaee.restaurant.servlet;
 
 import java.io.IOException;
 
