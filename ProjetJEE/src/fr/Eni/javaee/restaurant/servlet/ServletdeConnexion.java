@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.Eni.javaee.restaurant.BusinessException;
 import fr.Eni.javaee.restaurant.bll.UtilisateurManager;
@@ -41,6 +42,7 @@ public class ServletdeConnexion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	String mail = null;
 	String mot_de_passe = null;
+	//String exemple;
 	
 	UtilisateurManager utilisateurmanager = new UtilisateurManager();
 	
@@ -67,22 +69,25 @@ public class ServletdeConnexion extends HttpServlet {
 			int idUtilisateur = 0;
 			//ok
 			try {
+//				Création ou récuperation de session
+				HttpSession session=request.getSession();
+				//Mise en session d'une chaîne de caractère
 				Utilisateur utilisateur = utilisateurmanager.selectUtilisateurByIdUtilisateur(idUtilisateur);
+				utilisateur.getRoles();
+				session.setAttribute("role", utilisateur.getRoles().get(0));
 			} catch (BusinessException e) {
 				
 				e.printStackTrace();
 			}
-		}
+	
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil.jsp");
+
+			rd.forward(request, response);}
+		
 	} catch (BusinessException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 		 
-			
-			
-		
-	
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
 		rd.forward(request, response);
 	}
