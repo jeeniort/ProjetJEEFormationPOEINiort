@@ -75,6 +75,7 @@ public class ServletdeConnexion extends HttpServlet {
 				Utilisateur utilisateur = utilisateurmanager.selectUtilisateurByIdUtilisateur(idUtilisateur);
 				utilisateur.getRoles();
 				session.setAttribute("role", utilisateur.getRoles().get(0));
+				session.setMaxInactiveInterval(10*60);
 			} catch (BusinessException e) {
 				
 				e.printStackTrace();
