@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="fr.Eni.javaee.restaurant.bo.Utilisateur" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 
-	<div >
+	<div class="mb-4">
 		<nav class="navbar navbar-expand-lg navbar-light bg-info"> <a
 			class="navbar-brand" href='<%=request.getContextPath() + "/RedirigeAccueil"%>'>RESTAURANT</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -22,25 +24,33 @@
 					href='<%=request.getContextPath() + "/ServletRedirigeAjoutPlats"%>' >Ajouter plats</a></li>
 					
 				<li class="nav-item"><a class="nav-link"
-					href='<%=request.getContextPath() + "/ServletdeConnexion"%>'>Connection</a></li>
+					href='<%=request.getContextPath() + "/ServletdeConnexion"%>'>Connexion</a></li>
 					
 				<li class="nav-item"><a class="nav-link "
 					href='<%=request.getContextPath() + "/ServletInscription"%>' >Inscription</a></li>
-
-				<li class="nav-item"><a class="nav-link "
-					href='<%=request.getContextPath() + ""%>' >Mon
+				<c:if test="${!empty sessionScope.utilisateur.role}">
+					<li class="nav-item"><a class="nav-link "
+						href='<%=request.getContextPath() + "/ServletMonCompte"%>' >Mon
 						compte</a></li>
+				</c:if>
 			</ul>
 
 		</div>
 
 		<div>
-			<button type="submit" class="btn btn-dark"
-				href='<%=request.getContextPath() + "/ServletdeConnexion"%>' >Se
-				connecter</button>
-			<button type="submit" class="btn btn-dark"
-				href='<%=request.getContextPath() + "/ServletInscription"%>'>S'inscrire</button>
-
+			<c:if test="${empty sessionScope.utilisateur.role}">
+				<button type="submit" class="btn btn-dark"
+					href='<%=request.getContextPath() + "/ServletdeConnexion"%>' >Se
+					connecter</button>
+				<button type="submit" class="btn btn-dark"
+					href='<%=request.getContextPath() + "/ServletInscription"%>'>S'inscrire</button>
+			</c:if>
+			<c:if test="${!empty sessionScope.utilisateur.role}">
+				<button type="submit" class="btn btn-dark"
+					href='<%=request.getContextPath() + "/ServletDeconnect"%>' >Se
+					déconnecter</button>				
+			</c:if>
+	
 
 		</div>
 		</nav>
