@@ -21,7 +21,37 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String reqSql_selectUtilisateurById = "SELECT id_utilisateur,nom,prenom,email,commentaire FROM utilisateur where id_utilisateur=?";
 	// Requete SQL pour la m�thod reqSql_gteIdUtilisateurByMailPassword
 	private static final String reqSql_selectCommentaireByIdUtilisateur = "SELECT id_utilisateur,nom,prenom,email,commentaire FROM utilisateur where id_utilisateur=?";
+	// Requete SQL pour la m�thod reqSql_selectRolesByIdUtilisateur
+	private static final String reqSql_selectRolesByIdUtilisateur = "SELECT code_role FROM role_utilisateur WHERE id_utilisateur = ?";
 
+	@Override
+	public void selectRolesByIdUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		List<String> listRoles= new ArrayList<String>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(reqSql_selectRolesByIdUtilisateur);
+			pstmt.setInt(1, utilisateur.getId());
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				listRoles.add(rs.getString(1));
+			}
+			System.out.println("Retour BDD des roles" + listRoles.toString());
+			utilisateur.setRoles(listRoles);
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			if (e.getMessage().contains("CK_AVIS_note")) {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
+			} else {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			}
+			throw businessException;
+		}
+		
+	}
+	
+	
 	@Override
 	public Utilisateur selectUtilisateurById(int idUtilisateur) throws BusinessException {
 		Utilisateur utilisateur = new Utilisateur();
@@ -48,6 +78,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 
 		System.out.println("Retour BDD " + utilisateur.toString());
+		selectRolesByIdUtilisateur(utilisateur);
 		return utilisateur;
 	}
 
@@ -97,8 +128,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 			while (rs.next()) {
 				if (newPlat == null) {
-					newPlat = new Plat(rs.getInt(5), rs.getFloat(6), rs.getString(7), rs.getString(8), rs.getString(9),
-							rs.getString(10), rs.getInt(11), rs.getString(12), rs.getString(13));
+					newPlat = new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
+							rs.getString(6), rs.getInt(7),rs.getInt(8), rs.getString(9), rs.getString(10));
 					System.out.println("newPlat pour l'id utilisateur " + idUtilisateur + " : \n" + newPlat.toString());
 				}
 				Utilisateur newUtilisateur = new Utilisateur(rs.getInt(14), rs.getString(15), rs.getString(16),
