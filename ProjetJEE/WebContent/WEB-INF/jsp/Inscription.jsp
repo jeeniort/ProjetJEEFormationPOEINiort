@@ -27,7 +27,7 @@
 		<div class="form-group col-md-4">
 			<label for="prenom">Email</label> <input type="text"
 				class="form-control" id="email"
-				name='<c:out value="${param.email}"/>' placeholder="email" required>
+				name="email" value='<c:out value="${param.email}"/>' placeholder="email" required>
 			<span class="erreur">${erreurs['email']}</span>
 		</div>
 		<br>
