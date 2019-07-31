@@ -78,6 +78,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 
 		System.out.println("Retour BDD " + utilisateur.toString());
+		selectRolesByIdUtilisateur(utilisateur);
 		return utilisateur;
 	}
 

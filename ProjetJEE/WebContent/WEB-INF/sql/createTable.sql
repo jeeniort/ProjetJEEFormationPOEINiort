@@ -43,7 +43,7 @@ go
 CREATE TABLE role_utilisateur (
 id_ru INT NOT NULL IDENTITY(1,1) ,
 id_utilisateur int not null,
-nom varchar(24) not null,
+code_role varchar(24) not null,
 commentaire varchar(200)  null,
 CONSTRAINT [PK_ru_utilisateur] PRIMARY KEY CLUSTERED (id_ru),
 CONSTRAINT [FK_ru_utilisateur] FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
