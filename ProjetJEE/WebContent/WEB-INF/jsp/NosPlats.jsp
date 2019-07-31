@@ -12,11 +12,15 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+	
 
 </head>
 <body class="container">
 	<%@ include file="entete.jsp"%>
-	<div class="col-8 offset-md-2 mt-4 mb-4">
+	<div class="container-fluid mt-4 ">
+	<div class="row">
+		<div class="col-md-8">
+		<div class="col-8 offset-md-2 mt-4 mb-4">
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -61,8 +65,24 @@
 			</a>
 		</div>
 	</div>
-	<div id="PlatCarousel" class="col-8 offset-md-2 mt-4 mb-4"></div>
-	<div id="CommentaireCarousel" class="col-8 offset-md-2 mt-4 mb-4"></div>
+		</div>
+		<div class="col-md-4">
+		<div id="PlatCarousel"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+		<div id="CommentaireCarousel"></div>
+		</div>
+		<div class="col-md-6">
+		</div>
+	</div>
+</div>
+	
+	
+	
+	
+	
 	<%@ include file="piedDePage.html"%>
 	<script src="jquery/jquery.min.js" type="text/javascript"></script>
 	<script
