@@ -128,8 +128,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 			while (rs.next()) {
 				if (newPlat == null) {
-					newPlat = new Plat(rs.getInt(5), rs.getFloat(6), rs.getString(7), rs.getString(8), rs.getString(9),
-							rs.getString(10), rs.getInt(11), rs.getString(12), rs.getString(13));
+					newPlat = new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
+							rs.getString(6), rs.getInt(7),rs.getInt(8), rs.getString(9), rs.getString(10));
 					System.out.println("newPlat pour l'id utilisateur " + idUtilisateur + " : \n" + newPlat.toString());
 				}
 				Utilisateur newUtilisateur = new Utilisateur(rs.getInt(14), rs.getString(15), rs.getString(16),

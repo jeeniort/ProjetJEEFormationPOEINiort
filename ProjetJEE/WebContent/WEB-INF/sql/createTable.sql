@@ -9,6 +9,7 @@ presentation varchar(250) not null,
 niveau varchar(24) not null,
 cout varchar(24) not null,
 nbconvive int not null,
+nbcommande int not null,
 listingredient varchar(500) not null,
 imageurl varchar(50) not null,
 CONSTRAINT [PK_plat] PRIMARY KEY CLUSTERED (id_plat)

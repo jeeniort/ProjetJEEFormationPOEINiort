@@ -8,7 +8,7 @@ INSERT INTO [dbo].[commentaire]
            ,[commentaire]
            ,[date])
      VALUES
-           (9,1,3,'C''est très bon !!!',getdate())
+           (5,1,3,'C''est très bon !!!',getdate())
 GO
 
 

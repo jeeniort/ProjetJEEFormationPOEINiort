@@ -16,14 +16,15 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 	private static final String reqSql_Insert = "INSERT INTO plat(prix,nom,presentation,niveau,cout,nbconvive,listingredient,imageurl) VALUES(?,?,?,?,?,?,?,?)";
 	// Requete SQL pour la m�thod reqSql_getListeCommentaireByIdPlat
 	private static final String reqSql_getListeCommentaireByIdPlat = "SELECT c.id_commentaire,c.note,c.commentaire,c.date, "
-			+ "		p.id_plat, p.prix, p.nom, p.presentation, p.niveau, p.cout, p.nbconvive, p.listingredient, p.imageurl,"
-			+ "		u.id_utilisateur, u.nom, u.prenom, u.email, u.commentaire" + "	" + "		FROM commentaire c "
+			+ "		p.id_plat, p.prix, p.nom, p.presentation, p.niveau, p.cout, p.nbconvive,p.nbcommande, p.listingredient, p.imageurl,"
+			+ "		u.id_utilisateur, u.nom, u.prenom, u.email, u.commentaire" + "	" + "		"
+			+ "		FROM commentaire c "
 			+ "			inner join utilisateur u on u.id_utilisateur = c.id_utilisateur "
 			+ "			inner join plat p on p.id_plat = c.id_plat  " + "	" + "		WHERE c.id_plat =?";
 	// Requete SQL pour la m�thod SelectALL
-	private static final String reqSql_selectAll = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,listIngredient,imageURL FROM plat order by id_plat";
+	private static final String reqSql_selectAll = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,nbcommande,listIngredient,imageURL FROM plat order by id_plat";
 	// Requete SQL pour la m�thod reqSql_getPlatByIdPlat
-	private static final String reqSql_getPlatByIdPlat = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,listingredient,imageurl FROM plat where id_plat=?";
+	private static final String reqSql_getPlatByIdPlat = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,nbcommande,listingredient,imageurl FROM plat where id_plat=?";
 
 	@Override
 	public void insert(Plat plat) throws BusinessException {
@@ -42,8 +43,9 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 			pstmt.setString(4, plat.getNiveau());
 			pstmt.setString(5, plat.getCout());
 			pstmt.setInt(6, plat.getNbConvive());
-			pstmt.setString(7, plat.getListIngredient());
-			pstmt.setString(8, plat.getImageURL());
+			pstmt.setInt(7, 0);
+			pstmt.setString(8, plat.getListIngredient());
+			pstmt.setString(9, plat.getImageURL());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
@@ -73,7 +75,7 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 			while (rs.next()) {
 				System.out.println("Id retour BDD " + rs.getInt(1));
 				listePlats.add(new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9)));
+						rs.getString(6), rs.getInt(7),rs.getInt(8), rs.getString(9), rs.getString(10)));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,8 +102,8 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 			Plat newPlat = null;
 			while (rs.next()) {
 				if (newPlat == null) {
-					newPlat = new Plat(rs.getInt(5), rs.getFloat(6), rs.getString(7), rs.getString(8), rs.getString(9),
-							rs.getString(10), rs.getInt(11), rs.getString(12), rs.getString(13));
+					newPlat = new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
+							rs.getString(6), rs.getInt(7),rs.getInt(8), rs.getString(9), rs.getString(10));
 					System.out.println("newPlat pour l'id " + idPlat + " : \n" + newPlat.toString());
 				}
 				Utilisateur newUtilisateur = new Utilisateur(rs.getInt(14), rs.getString(15), rs.getString(16),
@@ -136,7 +138,7 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 
 			if (rs.next()) {
 				plat = new Plat(rs.getInt(1), rs.getFloat(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9));
+						rs.getString(6), rs.getInt(7),rs.getInt(8), rs.getString(9), rs.getString(10));
 				System.out.println(rs.getInt(1));
 			}
 		} catch (Exception e) {
