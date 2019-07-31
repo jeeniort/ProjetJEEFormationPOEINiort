@@ -1,5 +1,6 @@
 package fr.Eni.javaee.restaurant.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -23,15 +24,17 @@ public class GestionPlats {
 	@GET
 	@Path("/{id : \\d+}")
 	public Plat getFullPlatById(@PathParam("id") int idPlat) throws BusinessException {
-		System.out.println("Id plat reçus pour recherche via REST "+idPlat);
-		return platManager.SelectPlatByIdPlat(idPlat);
+		Plat plat = null;
+		plat = platManager.SelectPlatByIdPlat(idPlat);
+		return plat;
 	}
 
 	@GET
 	@Path("/{id : \\d+}/commentaire")
 	public List<Commentaire> getCommentaireByIdPlat(@PathParam("id") int idPlat) throws BusinessException {
-
-		return platManager.selectCommentaireByIdPlat(idPlat);
+		List<Commentaire> listCommentaire = new ArrayList<Commentaire>();
+		listCommentaire = platManager.selectCommentaireByIdPlat(idPlat);
+		return listCommentaire;
 	}
 
 }

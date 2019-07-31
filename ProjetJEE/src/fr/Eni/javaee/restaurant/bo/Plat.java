@@ -18,6 +18,7 @@ public class Plat implements Serializable {
 	private int nbConvive;
 	private String listIngredient;
 	private String imageURL;
+	private int nbCommande;
 
 	public int getId() {
 		return id;
@@ -91,11 +92,19 @@ public class Plat implements Serializable {
 		this.imageURL = imageURL;
 	}
 
+	public int getNbCommande() {
+		return nbCommande;
+	}
+
+	public void setNbCommande(int nbCommande) {
+		this.nbCommande = nbCommande;
+	}
+
 	public Plat() {
 		super();
 	}
 
-	public Plat(float prix, String nom, String presentation, String niveau, String cout, int nbConvive,
+	public Plat(float prix, String nom, String presentation, String niveau, String cout, int nbConvive, int nbcommande,
 			String listIngredient, String imageURL) {
 		setPrix(prix);
 		setNom(nom);
@@ -103,12 +112,13 @@ public class Plat implements Serializable {
 		setNiveau(niveau);
 		setCout(cout);
 		setNbConvive(nbConvive);
+		setNbCommande(nbcommande);
 		setListIngredient(listIngredient);
 		setImageURL(imageURL);
 
 	}
 
-	public Plat(int id, float prix, String nom, String presentation, String niveau, String cout, int nbConvive,
+	public Plat(int id, float prix, String nom, String presentation, String niveau, String cout, int nbConvive, int nbcommande,
 			String listIngredient, String imageURL) {
 		setId(id);
 		setPrix(prix);
@@ -117,6 +127,7 @@ public class Plat implements Serializable {
 		setNiveau(niveau);
 		setCout(cout);
 		setNbConvive(nbConvive);
+		setNbCommande(nbcommande);
 		setListIngredient(listIngredient);
 		setImageURL(imageURL);
 	}
@@ -125,8 +136,9 @@ public class Plat implements Serializable {
 	public String toString() {
 		return "Plat [id=" + id + ", prix=" + prix + ", nom=" + nom + ", presentation=" + presentation + ", niveau="
 				+ niveau + ", cout=" + cout + ", nbConvive=" + nbConvive + ", listIngredient=" + listIngredient
-				+ ", imageURL=" + imageURL + "]\n";
+				+ ", imageURL=" + imageURL + ", nbCommande=" + nbCommande + "]";
 	}
+
 
 
 
