@@ -77,7 +77,7 @@
 					</div>
 					<div class="col-md-4  bg-light" id="nomPlat">
 					</div>
-					<div class="col-md-1  bg-light">
+					<div class="col-md-3  bg-light">
 					</div>
 					<div class="col-md-2  bg-light" id="nbCommande"> 
 					</div>			

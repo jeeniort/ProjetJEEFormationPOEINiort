@@ -60,7 +60,6 @@ public class Utilisateur {
 		this.commentaire = commentaire;
 	}
 
-
 	public List<String> getRoles() {
 		return roles;
 	}

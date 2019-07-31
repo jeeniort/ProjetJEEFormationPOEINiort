@@ -75,16 +75,17 @@
 		function ajouterBaliseCom(data) {
 			var newCommentairecontent = '';
 			var sumNote = 0;
-			console.log(data.length);
 			   for(var j=0;j<data.length;j++)
 		    	{
-				   sumNote += data[j].note;				   
+				   sumNote += data[j].note;	
+				   var dateCommentaire = data[j].date.dayOfMonth+'/'+data[j].date.monthValue+'/'+data[j].date.year+' '+data[j].date.hour+':'+data[j].date.minute;
 					   var newCommentairecontent = newCommentairecontent+'	<div class="col-md-5 offset-md-1 mb-2"><div class=" note" id="card' + data[j].id + '">' +
 					'	<div class="card">' +
 					'	<div class="card-header  bg-info">' +
 					'	<div class="row">'+
-					'	<div class="col-4">' + data[j].utilisateur.nom + '</div>' +
-					'	<div class="col-4 offset-2"> Note : '  + data[j].note + '/5</div>' +
+					'	<div class="col-2">By : ' + data[j].utilisateur.nom + '</div>' +
+					'	<div class="col-2 offset-3"> Note : '  + data[j].note + '/5</div>' +
+					'	<div class="col-3 offset-2">'  + dateCommentaire + '</div>' +
 					'	</div></div>' +
 					'	<div class="card-body">' +
 					data[j].commentaire +
