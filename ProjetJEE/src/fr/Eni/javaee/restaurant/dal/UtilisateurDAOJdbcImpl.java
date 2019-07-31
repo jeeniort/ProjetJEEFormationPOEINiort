@@ -21,7 +21,37 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String reqSql_selectUtilisateurById = "SELECT id_utilisateur,nom,prenom,email,commentaire FROM utilisateur where id_utilisateur=?";
 	// Requete SQL pour la m�thod reqSql_gteIdUtilisateurByMailPassword
 	private static final String reqSql_selectCommentaireByIdUtilisateur = "SELECT id_utilisateur,nom,prenom,email,commentaire FROM utilisateur where id_utilisateur=?";
+	// Requete SQL pour la m�thod reqSql_selectRolesByIdUtilisateur
+	private static final String reqSql_selectRolesByIdUtilisateur = "SELECT code_role FROM role_utilisateur WHERE id_utilisateur = ?";
 
+	@Override
+	public void selectRolesByIdUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		List<String> listRoles= new ArrayList<String>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(reqSql_selectRolesByIdUtilisateur);
+			pstmt.setInt(1, utilisateur.getId());
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				listRoles.add(rs.getString(1));
+			}
+			System.out.println("Retour BDD des roles" + listRoles.toString());
+			utilisateur.setRoles(listRoles);
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			if (e.getMessage().contains("CK_AVIS_note")) {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_AVIS_NOTE_ECHEC);
+			} else {
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			}
+			throw businessException;
+		}
+		
+	}
+	
+	
 	@Override
 	public Utilisateur selectUtilisateurById(int idUtilisateur) throws BusinessException {
 		Utilisateur utilisateur = new Utilisateur();

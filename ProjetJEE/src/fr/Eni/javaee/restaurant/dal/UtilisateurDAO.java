@@ -16,5 +16,6 @@ public interface UtilisateurDAO {
 
 	public int getIdUtilisateurByMailPassword(String mail, String password) throws BusinessException;
 
+	public void selectRolesByIdUtilisateur(Utilisateur utilisateur) throws BusinessException;
 
 }

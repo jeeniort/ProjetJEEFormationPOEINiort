@@ -1,5 +1,7 @@
 package fr.Eni.javaee.restaurant.bo;
 
+import java.util.List;
+
 public class Utilisateur {
 
 	private int id;
@@ -8,6 +10,7 @@ public class Utilisateur {
 	private String email;
 	private String mdp;
 	private String commentaire;
+	private List<String> roles;
 
 	public int getId() {
 		return id;
@@ -55,6 +58,15 @@ public class Utilisateur {
 
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
+	}
+
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 	public Utilisateur(int id, String nom, String prenom, String email, String commentaire) {

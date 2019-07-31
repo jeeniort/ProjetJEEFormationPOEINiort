@@ -12,7 +12,6 @@ public class UtilisateurManager {
 	private UtilisateurDAO utilisateurDAO;
 
 	public UtilisateurManager() {
-
 		this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
 
@@ -33,7 +32,10 @@ public class UtilisateurManager {
 		int idUtilisateur = -1;
 		idUtilisateur = utilisateurDAO.getIdUtilisateurByMailPassword(mail, password) == 0 ? idUtilisateur
 				: utilisateurDAO.getIdUtilisateurByMailPassword(mail, password);
-
 		return idUtilisateur;
 	}
+	
+	public void getRoles(Utilisateur utilisateur) throws BusinessException {
+		utilisateurDAO.selectRolesByIdUtilisateur(utilisateur);
+	}	
 }

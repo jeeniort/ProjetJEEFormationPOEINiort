@@ -15,7 +15,7 @@
 	
 
 </head>
-<body class="container">
+<body>
 	<%@ include file="entete.jsp"%>
 	<div class="container-fluid mt-4 ">
 	<div class="row">
