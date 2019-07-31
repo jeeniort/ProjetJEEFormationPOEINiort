@@ -36,4 +36,9 @@ public class UtilisateurManager {
 
 		return idUtilisateur;
 	}
+
+	public Utilisateur insert(String email, String motDePasse, String confirmation, String nom, String prenom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
