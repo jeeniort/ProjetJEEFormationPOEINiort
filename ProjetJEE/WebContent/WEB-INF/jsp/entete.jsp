@@ -38,14 +38,16 @@
 		</div>
 
 		<div>
-			<c:if test="${empty sessionScope.utilisateur.role}">
+			<c:if test="${empty sessionScope.utilisateur}">
 				<button type="submit" class="btn btn-dark"
 					href='<%=request.getContextPath() + "/ServletdeConnexion"%>' >Se
 					connecter</button>
 				<button type="submit" class="btn btn-dark"
 					href='<%=request.getContextPath() + "/ServletInscription"%>'>S'inscrire</button>
 			</c:if>
-			<c:if test="${!empty sessionScope.utilisateur.role}">
+			<c:if test="${!empty sessionScope.utilisateur}">
+			<div>${ sessionScope.utilisateur.nom}</div>
+			
 				<button type="submit" class="btn btn-dark"
 					href='<%=request.getContextPath() + "/ServletDeconnect"%>' >Se
 					déconnecter</button>				
