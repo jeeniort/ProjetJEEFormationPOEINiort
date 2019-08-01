@@ -1,63 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="fr.Eni.javaee.restaurant.bo.Utilisateur" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="fr.Eni.javaee.restaurant.bo.Utilisateur"%>
+<%@ page import="java.util.ArrayList,java.util.List"%>
+<%@ page import="fr.Eni.javaee.restaurant.bll.UtilisateurManager"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 
-	<div class="mb-4">
-		<nav class="navbar navbar-expand-lg navbar-light bg-info"> <a
-			class="navbar-brand" href='<%=request.getContextPath() + "/RedirigeAccueil"%>'>RESTAURANT</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link"
-					href='<%=request.getContextPath() + "/NosPlats"%>' >Nos
-						plats<span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href='<%=request.getContextPath() + "/ServletRedirigeAjoutPlats"%>' >Ajouter plats</a></li>
-					
-				<li class="nav-item"><a class="nav-link"
-					href='<%=request.getContextPath() + "/ServletdeConnexion"%>'>Connexion</a></li>
-					
-				<li class="nav-item"><a class="nav-link "
-					href='<%=request.getContextPath() + "/ServletInscription"%>' >Inscription</a></li>
-				<c:if test="${!empty sessionScope.utilisateur.role}">
-					<li class="nav-item"><a class="nav-link "
-						href='<%=request.getContextPath() + "/ServletMonCompte"%>' >Mon
-						compte</a></li>
-				</c:if>
-			</ul>
+<div class="mb-4">
+	<nav class="navbar navbar-expand-lg navbar-light bg-info"> <a
+		class="navbar-brand"
+		href='<%=request.getContextPath() + "/RedirigeAccueil"%>'>RESTAURANT</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarNav" aria-controls="navbarNav"
+		aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				href='<%=request.getContextPath() + "/NosPlats"%>'>Nos plats<span
+					class="sr-only">(current)</span>
+			</a></li>
+			<%
+				UtilisateurManager utilisateurManager = new UtilisateurManager();
+				Utilisateur utilisateur = null;
+				utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 
-		</div>
+				if (utilisateur != null)
 
-		<div>
-			<c:if test="${empty sessionScope.utilisateur}">
-				<button type="submit" class="btn btn-dark"
-					href='<%=request.getContextPath() + "/ServletdeConnexion"%>' >Se
-					connecter</button>
-				<button type="submit" class="btn btn-dark"
-					href='<%=request.getContextPath() + "/ServletInscription"%>'>S'inscrire</button>
-			</c:if>
-			<c:if test="${!empty sessionScope.utilisateur}">
-			<div>${ sessionScope.utilisateur.nom}</div>
-			
-				<button type="submit" class="btn btn-dark"
-					href='<%=request.getContextPath() + "/ServletDeconnect"%>' >Se
-					déconnecter</button>				
-			</c:if>
-	
+				{
+			%>
+			<li class="nav-item"><a class="nav-link "
+				href='<%=request.getContextPath() + "/ServletMonCompte"%>'>Mon
+					compte</a></li>
 
-		</div>
-		</nav>
+			<%
+				List<String> listRoles = utilisateur.getRoles();
+					if (listRoles != null && listRoles.size() > 0) {
+						for (String role : utilisateur.getRoles()) {
+							if (role.equals("admin")) {
+			%>
+			<li class="nav-item"><a class="nav-link"
+				href='<%=request.getContextPath() + "/ServletRedirigeAjoutPlats"%>'>Ajouter
+					plats</a></li>
+			<%
+				}
+						}
+					}
+				}
+			%>
+		</ul>
+
 	</div>
 
+
+
+	<c:if test="${empty sessionScope.utilisateur}">
+		<a href='<%=request.getContextPath() + "/ServletdeConnexion"%>'
+			class="btn btn-dark" role="button">Se connecter</a><p>&nbsp;</p>
+		<a href='<%=request.getContextPath() + "/ServletInscription"%>'
+			class="btn btn-dark" role="button">S'inscrire</a>
+
+	</c:if> <c:if test="${!empty sessionScope.utilisateur}">
+		<h4>${ sessionScope.utilisateur.nom}</h4><p>&nbsp;</p>
+
+		<a href='<%=request.getContextPath() + "/ServletDeconnect"%>'
+			class="btn btn-dark" role="button">Se déconnecter</a>
+
+	</c:if>
+</div>
+</nav>
+
+</div>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -74,5 +90,3 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous" type="text/javascript"></script>
-
-

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList,java.util.List"%>
 <%@ page import="fr.Eni.javaee.restaurant.bll.PlatManager"%>
 <%@ page import="fr.Eni.javaee.restaurant.bo.Plat"%>
