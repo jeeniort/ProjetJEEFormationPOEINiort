@@ -6,7 +6,8 @@
 <%@ page import="fr.Eni.javaee.restaurant.bo.Commentaire"%>
 <%@ page import="java.time.LocalDateTime"%>
 <%@ page import="java.time.format.DateTimeFormatter"%>
-
+<%@ page import="fr.Eni.javaee.restaurant.bo.Utilisateur"%>
+<%@ page import="fr.Eni.javaee.restaurant.dal.UtilisateurDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +18,10 @@
 	<%@ include file="entete.jsp"%>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-10 offset-1">
+			<div class="col-12">
 				<h1>Mon Compte</h1>
 				<div class="row">
-					<div class="col-5 offset-1">
+					<div class="col-4">
 						<form action="/ServletdeConnexion" method="post">
 							<div class="form-group">
 								<label for="nom">Changer email</label> <input type="email"
@@ -52,29 +53,33 @@
 							</p>
 						</form>
 					</div>
-					<div class="col-5 offset-1">
-						<%
-							UtilisateurManager utilisateurManager = new UtilisateurManager();
-							List<Commentaire> listeCommentaire = new ArrayList<Commentaire>();
-							listeCommentaire = (List<Commentaire>) request.getAttribute("listeCommentaire");
+					<div class="col-md-7 offset-md-1 mb-2">
 
-							Boolean isActif = true;
+						<%
+							UtilisateurManager um = new UtilisateurManager();
+							Utilisateur user = null;
+							user = (Utilisateur) session.getAttribute("utilisateur");
+
+							List<Commentaire> listeCommentaire = new ArrayList<Commentaire>();
+							if (utilisateur != null) {
+								listeCommentaire = um.getCommentairesByIdUtilisateur(user.getId());
+							}
 							for (Commentaire commentaire : listeCommentaire) {
 								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 						%>
-						<div class="col-md-5 offset-md-1 mb-2">
+						<div class="col-md-12 mb-2 mt-4">
 							<div class="note" id="card<%=commentaire.getId()%>">
 								<div class="card">
 									<div class="card-header  bg-info">
-										<div class="row">
+										<div class="row">											
 											<div class="col-2">
-												By :
-												<%=commentaire.getUtilisateur().getNom()%></div>
-											<div class="col-2 offset-3">
 												Note :
 												<%=commentaire.getNote()%>/5
 											</div>
-											<div class="col-3 offset-2"><%=commentaire.getDate().format(formatter)%></div>
+												<div class="col-5 offset-1">												
+												<%=commentaire.getPlat().getNom()%>
+											</div>
+											<div class="col-3 offset-1"><%=commentaire.getDate().format(formatter)%></div>
 										</div>
 									</div>
 									<div class="card-body"><%=commentaire.getCommentaire()%></div>

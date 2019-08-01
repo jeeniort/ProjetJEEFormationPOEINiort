@@ -32,7 +32,7 @@
 						Boolean isActif = true;
 						for (Restaurant restaurant : listeResto) {
 					%>
-					<div id="restaurant<%=restaurant.getId()%>" class="col-sm-12 col-lg-6 mb-4">
+					<div id="restaurant<%=restaurant.getId()%>" class="col-xs-12 col-lg-6 mb-4">
 						<div class="row">
 							<div class="col-md-10">
 								<img src="<%=request.getContextPath()%>/image/<%=restaurant.getImageURL()%>"

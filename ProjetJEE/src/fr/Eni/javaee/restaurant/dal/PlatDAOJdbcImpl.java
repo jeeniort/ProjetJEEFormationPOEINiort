@@ -13,7 +13,7 @@ import fr.Eni.javaee.restaurant.bo.Utilisateur;
 
 public class PlatDAOJdbcImpl implements PlatDAO {
 	// Requete SQL pour la method Insert
-	private static final String reqSql_Insert = "INSERT INTO plat(prix,nom,presentation,niveau,cout,nbconvive,listingredient,imageurl) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String reqSql_Insert = "INSERT INTO plat(prix,nom,presentation,niveau,cout,nbconvive,nbcommande,listingredient,imageurl) VALUES(?,?,?,?,?,?,?,?,?)";
 	// Requete SQL pour la method reqSql_getListeCommentaireByIdPlat
 	private static final String reqSql_getListeCommentaireByIdPlat = "SELECT c.id_commentaire,c.note,c.commentaire,c.date, "
 			+ "		p.id_plat, p.prix, p.nom, p.presentation, p.niveau, p.cout, p.nbconvive, p.nbcommande, p.listingredient, p.imageurl,"
