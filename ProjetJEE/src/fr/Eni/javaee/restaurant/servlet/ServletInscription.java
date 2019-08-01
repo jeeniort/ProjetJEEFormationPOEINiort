@@ -37,7 +37,7 @@ public class ServletInscription extends HttpServlet {
 	}
 
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, BusinessException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String resultat;
 		Map<String, String> erreurs = new HashMap<String, String>();
 
