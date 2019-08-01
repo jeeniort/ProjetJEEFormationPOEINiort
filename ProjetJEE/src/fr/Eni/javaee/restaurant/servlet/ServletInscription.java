@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fr.Eni.javaee.restaurant.BusinessException;
 import fr.Eni.javaee.restaurant.bll.UtilisateurManager;
 import fr.Eni.javaee.restaurant.bo.Utilisateur;
 
@@ -35,7 +37,7 @@ public class ServletInscription extends HttpServlet {
 	}
 
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, BusinessException {
 		String resultat;
 		Map<String, String> erreurs = new HashMap<String, String>();
 
@@ -61,12 +63,29 @@ public class ServletInscription extends HttpServlet {
 		} catch (Exception e) {
 			erreurs.put(CHAMP_PASS, e.getMessage());
 		}
-
+		System.out.println(erreurs.toString());
+		
+		System.out.println(erreurs.isEmpty());
 		/* Initialisation du résultat global de la validation. */
 		if (erreurs.isEmpty()) {
 			UtilisateurManager um = new UtilisateurManager();
-			Utilisateur utilisateurinsert = um.insert(email, motDePasse, confirmation, nom, prenom);
+			Utilisateur utilisateur = null;
+			try {
+				 utilisateur = new Utilisateur(nom, prenom, email, motDePasse, null);
+				um.insert(utilisateur);
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			resultat = "Succès de l'inscription.";
+			
+			//				Création ou récuperation de session
+							HttpSession session=request.getSession();
+							//Mise en session d'une chaîne de caractère
+							
+							session.setAttribute("role", utilisateur.getRoles().get(0));
+							session.setMaxInactiveInterval(10*60);
+			
 		} else {
 			resultat = "Échec de l'inscription.";
 		}

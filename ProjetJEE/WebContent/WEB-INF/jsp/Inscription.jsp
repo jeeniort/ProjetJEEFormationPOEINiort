@@ -14,34 +14,34 @@
 	<form method="post"
 		action="<%=request.getContextPath()%>/ServletInscription">
 		<div class="form-group col-md-4">
-			<label for="nom">Nom</label> <input type="text" class="form-control"
+			<label for="nom">Nom<span class="requis">*</span></label> <input type="text" class="form-control"
 				id="nom" name="nom" placeholder="Nom" required>
 		</div>
 		<br>
 		<div class="form-group col-md-4">
-			<label for="prenom">Prénom</label> <input type="text"
+			<label for="prenom">Prénom<span class="requis">*</span></label> <input type="text"
 				class="form-control" id="prenom" name="prenom" placeholder="Prénom"
 				required>
 		</div>
 		<br>
 		<div class="form-group col-md-4">
-			<label for="prenom">Email</label> <input type="text"
+			<label for="prenom">Email<span class="requis">*</span></label> <input type="text"
 				class="form-control" id="email"
 				name="email" value='<c:out value="${param.email}"/>' placeholder="email" required>
 			<span class="erreur">${erreurs['email']}</span>
 		</div>
 		<br>
 		<div class="form-group col-md-4">
-			<label for="exampleInputPassword1">Mot de passe</label> <input
+			<label for="exampleInputPassword1">Mot de passe<span class="requis">*</span></label> <input
 				type="password" class="form-control" id="motdepasse1"
-				name="motdepasse1" placeholder="Mot de passe" required> <span
+				name="motdepasse" placeholder="Mot de passe" required> <span
 				class="erreur">${erreurs['motdepasse']}</span>
 		</div>
 		<br>
 		<div class="form-group col-md-4">
-			<label for="exampleInputPassword1">Confirmation Mot de passe</label>
+			<label for="exampleInputPassword1">Confirmation Mot de passe<span class="requis">*</span></label>
 			<input type="password" class="form-control" id="confirmation"
-				id="confirmation" placeholder="Confirmer Mot de passe" required>
+				name="confirmation" placeholder="Confirmer Mot de passe" required>
 			<span class="erreur">${erreurs['confirmation']}</span>
 		</div>
 
