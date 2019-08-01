@@ -13,11 +13,11 @@
 <form action="<%=request.getContextPath()%>/ServletdeConnexion" method="post">
   <div class="form-group col-md-4">
     <label for="exampleInputEmail1">Adresse mail</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre email svp">
+    <input type="mail" name="mail" class="form-control" id="mail"  placeholder="Entrez votre email svp">
   </div>
   <div class="form-group col-md-4">
     <label for="exampleInputPassword1">Mot de passe</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+    <input type="mot_de_passe" name="mot_de_passe" class="form-control" id="mot_de_passe" placeholder="Mot de passe">
   </div>
   <button type="submit" class="btn btn-primary" style="margin-left:450px">Connexion</button>
 </form>
