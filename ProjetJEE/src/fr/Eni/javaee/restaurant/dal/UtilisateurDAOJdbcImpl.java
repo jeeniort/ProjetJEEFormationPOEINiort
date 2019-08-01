@@ -16,7 +16,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	// Requete SQL pour la m�thod Insert
 	private static final String reqSql_Insert = "INSERT INTO utilisateur(nom,prenom,email,mdp,commentaire) VALUES(?,?,?,?,?)";
 	// Requete SQL pour la m�thod reqSql_gteIdUtilisateurByMailPassword
-	private static final String reqSql_getIdUtilisateurByMailPassword = "SELECT id_utilisateur FROM utilisateur where mail=? AND mdp=?";
+	private static final String reqSql_getIdUtilisateurByMailPassword = "SELECT id_utilisateur FROM utilisateur where email=? AND mdp=?";
 	// Requete SQL pour la m�thod reqSql_gteIdUtilisateurByMailPassword
 	private static final String reqSql_selectUtilisateurById = "SELECT id_utilisateur,nom,prenom,email,commentaire FROM utilisateur where id_utilisateur=?";
 	// Requete SQL pour la m�thod reqSql_gteIdUtilisateurByMailPassword
