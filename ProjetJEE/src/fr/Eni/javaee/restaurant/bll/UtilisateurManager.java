@@ -38,5 +38,4 @@ public class UtilisateurManager {
 
 		return utilisateurDAO.getCommentairesByIdUtilisateur(idUtilisateur);
 	}
-
 }

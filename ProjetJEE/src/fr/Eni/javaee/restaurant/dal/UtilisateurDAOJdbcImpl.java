@@ -97,7 +97,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(reqSql_Insert, PreparedStatement.RETURN_GENERATED_KEYS);
-
+System.out.println("insertion jdbc utilisateur "+utilisateur.toString());
 			pstmt.setString(1, utilisateur.getNom());
 			pstmt.setString(2, utilisateur.getPrenom());
 			pstmt.setString(3, utilisateur.getEmail());
