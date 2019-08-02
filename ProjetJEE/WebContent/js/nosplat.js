@@ -48,7 +48,7 @@
 			
 			
 			var newContent = '<div class="col-md-12 note" id="card' + data.id + '">' +
-			'	<div class="card">' +
+			'	<div class="card rounded border border-info">' +
 			'	<div class="card-header">' +
 			'	<h3><u>' + data.nom + '</u></h3>' +
 			'	<div class="col-12">'  + data.presentation + '</div>' +
@@ -79,9 +79,9 @@
 		    	{
 				   sumNote += data[j].note;	
 				   var dateCommentaire = data[j].date.dayOfMonth+'/'+data[j].date.monthValue+'/'+data[j].date.year+' '+data[j].date.hour+':'+data[j].date.minute;
-					   var newCommentairecontent = newCommentairecontent+'	<div class="col-md-5 offset-md-1 mb-2"><div class=" note" id="card' + data[j].id + '">' +
-					'	<div class="card">' +
-					'	<div class="card-header  bg-info">' +
+					   var newCommentairecontent = newCommentairecontent+'	<div class="col-md-5 offset-md-1 mb-2 ""><div class=" note" id="card' + data[j].id + '">' +
+					'	<div class="card rounded border border-info">' +
+					'	<div class="card-header  ">' +
 					'	<div class="row">'+
 					'	<div class="col-2">By : ' + data[j].utilisateur.nom + '</div>' +
 					'	<div class="col-2 offset-3"> Note : '  + data[j].note + '/5</div>' +
@@ -89,8 +89,6 @@
 					'	</div></div>' +
 					'	<div class="card-body">' +
 					data[j].commentaire +
-					'	</div>' +
-					'	<div class="card-footer">' +
 					'	</div>' +
 					'	</div>' +
 					'</div>	</div>';
