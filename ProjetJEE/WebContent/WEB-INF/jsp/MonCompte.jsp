@@ -21,15 +21,15 @@
 			<div class="col-12">
 				<h1>Mon Compte</h1>
 				<div class="row">
-					<div class="col-4">
-						<form action="/ServletdeConnexion" method="post">
+					<div class="col-3">
+						<form action="ServletMonCompte" method="post">
 							<div class="form-group">
-								<label for="nom">Changer email</label> <input type="email"
+								<label for="nom">Changer email <span class="text-danger">(*)</span></label> <input type="email"
 									class="form-control" id="Mail" name="Mail"
-									placeholder="${sessionScope.utilisateur.email}" required>
+									value="${sessionScope.utilisateur.email}" required>
 							</div>
 							<div class="form-group">
-								<label for="nom">Ancien mot de passe</label> <input
+								<label for="nom">Ancien mot de passe <span class="text-danger">(*)</span></label> <input
 									type="password" class="form-control" id="AncienMotdePasse"
 									name="AncienMotdePasse"
 									placeholder="Entrez l'ancien mot de passe svp" required>
@@ -38,19 +38,24 @@
 								<label for="nom">Nouveau mot de passe</label> <input
 									type="password" class="form-control" id="NouveauMotdePasse"
 									name="NouveauMotdePasse"
-									placeholder="Entrez le nouveau mot de passe svp" required>
+									placeholder="Entrez le nouveau mot de passe svp">
 							</div>
 							<div class="form-group">
 								<label for="nom">Confirmation nouveau mot de passe</label> <input
 									type="password" class="form-control"
 									id="confirmationNouveauMotdePasse"
 									name="confirmationNouveauMotdePasse"
-									placeholder="Entrez le nouveau mot de passe svp" required>
+									placeholder="Entrez le nouveau mot de passe svp">
 							</div>
-							<p>
-								<input type="submit" class="btn btn-primary"
-									style="margin-left: 450px" />
-							</p>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-3 text-danger">(*) : requis</div>
+									<div class="col-3 offset-6">
+										<input type="submit" class="btn btn-primary" />
+
+									</div>
+								</div>
+							</div>
 						</form>
 					</div>
 					<div class="col-md-7 offset-md-1 mb-2">
@@ -71,12 +76,12 @@
 							<div class="note" id="card<%=commentaire.getId()%>">
 								<div class="card">
 									<div class="card-header  bg-info">
-										<div class="row">											
+										<div class="row">
 											<div class="col-2">
 												Note :
 												<%=commentaire.getNote()%>/5
 											</div>
-												<div class="col-5 offset-1">												
+											<div class="col-5 offset-1">
 												<%=commentaire.getPlat().getNom()%>
 											</div>
 											<div class="col-3 offset-1"><%=commentaire.getDate().format(formatter)%></div>

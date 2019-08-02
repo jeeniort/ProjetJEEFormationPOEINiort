@@ -1,6 +1,7 @@
 package fr.Eni.javaee.restaurant.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.Eni.javaee.restaurant.BusinessException;
 import fr.Eni.javaee.restaurant.bll.PlatManager;
 import fr.Eni.javaee.restaurant.bo.Plat;
+import fr.Eni.javaee.restaurant.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletRedirigeAjoutPlats
@@ -35,8 +38,27 @@ public class ServletRedirigeAjoutPlats extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AjouterUnPlat.jsp");
-		rd.forward(request, response);
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = null;
+		utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		Boolean isAdmin = false;
+		if (utilisateur != null) {
+			List<String> listRoles = utilisateur.getRoles();
+			if (listRoles != null && listRoles.size() > 0) {
+				for (String role : utilisateur.getRoles()) {
+					if (role.equals("admin")) {
+						isAdmin = true;
+					}
+				}
+			}
+		}
+		if (isAdmin) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AjouterUnPlat.jsp");
+			rd.forward(request, response);
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/RedirigeAccueil");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
@@ -62,7 +84,8 @@ public class ServletRedirigeAjoutPlats extends HttpServlet {
 		String imageURL = request.getParameter("imageURL");
 
 		try {
-			platmanager.insert(new Plat(prix,nom,presentation,niveau,cout,nbcommande,nbcommande,listIngredient,imageURL));
+			platmanager.insert(
+					new Plat(prix, nom, presentation, niveau, cout, nbConvive, nbcommande, listIngredient, imageURL));
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

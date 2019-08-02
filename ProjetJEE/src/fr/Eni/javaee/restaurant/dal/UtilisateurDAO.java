@@ -18,4 +18,6 @@ public interface UtilisateurDAO {
 
 	public void selectRolesByIdUtilisateur(Utilisateur utilisateur) throws BusinessException;
 
+	public void update(Utilisateur utilisateur) throws BusinessException;
+
 }
