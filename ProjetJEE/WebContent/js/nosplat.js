@@ -125,13 +125,13 @@ function ajouterBaliseCom(data) {
             '	<div class="rounded border border-info card">' +
             '	<div class="card-header ">' +
             '	<div class="row">' +
-            '	<div class="col-2">By : ' +
+            '	<div class="col-4">By : ' +
             data[j].utilisateur.nom +
             '</div>' +
-            '	<div class="col-2 offset-2"> Note : ' +
+            '	<div class="col-2 offset-1"> Note : ' +
             data[j].note +
             '/5</div>' +
-            '	<div class="col-4 offset-2">' +
+            '	<div class="col-4 offset-1">' +
             dateCommentaire +
             '</div>' +
             '	</div></div>' +
