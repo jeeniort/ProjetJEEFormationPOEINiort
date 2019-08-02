@@ -64,7 +64,7 @@
 						</a>
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="col-md-5">
 				<div id="PlatCarousel"></div>
@@ -85,13 +85,27 @@
 			</div>
 		</div>
 	</div>
+	<%
+		String reqIsAdmin = (String) request.getAttribute("isAdmin");
+		if (reqIsAdmin != null && reqIsAdmin.equals("1")) {
+	%>
+	<script type="text/javascript">
+    var txtLienDelete = 'Delete';
+	</script>
+
+	<%
+		} else {
+	%>
+	<script type="text/javascript">
+    var txtLienDelete = '';
+	</script>
+	<%
+		}
+	%>
 
 
 
 
-
-
-	<%@ include file="piedDePage.html"%>
 	<script src="jquery/jquery.min.js" type="text/javascript"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
