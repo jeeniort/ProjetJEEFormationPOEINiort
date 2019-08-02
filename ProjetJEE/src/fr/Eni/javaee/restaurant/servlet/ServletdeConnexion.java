@@ -57,7 +57,6 @@ public class ServletdeConnexion extends HttpServlet {
 		String mailAsString = request.getParameter("mail");
 		String mot_de_passeAsString = request.getParameter("mot_de_passe");
 		// String exemple;
-		
 
 		UtilisateurManager utilisateurmanager = new UtilisateurManager();
 
@@ -71,7 +70,7 @@ public class ServletdeConnexion extends HttpServlet {
 				error = "il y a une erreur";
 				request.setAttribute("error", error);
 				tentative++;
-				
+
 				if (tentative == 3) {
 					tentative = 0;
 
@@ -79,22 +78,17 @@ public class ServletdeConnexion extends HttpServlet {
 
 					rd.forward(request, response);
 				} else {
-					RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
-					rd.forward(request, response);
-				}
-				else{
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
-
 					rd.forward(request, response);
-					
 				}
+				;
 
 				// erreur
 			} else {
 
 				// ok
 				try {
-					
+
 					// Création ou récuperation de session
 					HttpSession session = request.getSession();
 					// Mise en session d'une chaîne de caractère
