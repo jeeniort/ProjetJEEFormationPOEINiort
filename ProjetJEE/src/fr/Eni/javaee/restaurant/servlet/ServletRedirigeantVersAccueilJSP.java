@@ -2,7 +2,12 @@ package fr.Eni.javaee.restaurant.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,6 +27,7 @@ import fr.Eni.javaee.restaurant.bo.Restaurant;
 public class ServletRedirigeantVersAccueilJSP extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RestaurantManager restaurantManager = new RestaurantManager();
+	public static Logger logger = Logger.getLogger("log");
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -29,6 +35,30 @@ public class ServletRedirigeantVersAccueilJSP extends HttpServlet {
 	public ServletRedirigeantVersAccueilJSP() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void init() throws ServletException {
+
+		super.init();
+		try {
+			FileHandler handler = new FileHandler("logs.log", true);
+			handler.setFormatter(new SimpleFormatter() {
+				private static final String format = "[%1$tF %1$tT] [%2$-7s] %3$s %n";
+
+				@Override
+				public synchronized String format(LogRecord lr) {
+					return String.format(format, new Date(lr.getMillis()), lr.getLevel().getLocalizedName(),
+							lr.getMessage());
+				}
+			});
+			logger.addHandler(handler);
+
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

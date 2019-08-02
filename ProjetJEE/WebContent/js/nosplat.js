@@ -119,7 +119,7 @@ function ajouterBaliseCom(data) {
 	}
 
 	var newCommentairecontent = newCommentairecontent + '</div>';
-	let avg = sumNote / data.length;
+	let avg = Math.round(100*sumNote / data.length)/100;
 	$("#noteAvg").append('Note moyenne : ' + avg + '/5');
 	$("#CommentaireCarousel").append(newCommentairecontent);
 
