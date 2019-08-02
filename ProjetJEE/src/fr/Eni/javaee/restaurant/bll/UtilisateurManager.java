@@ -19,6 +19,11 @@ public class UtilisateurManager {
 		utilisateurDAO.insert(utilisateur);
 	}
 
+	public void update(Utilisateur utilisateur) throws BusinessException {
+		System.out.println("utilisateurDAO.update "+utilisateur.toString());
+		utilisateurDAO.update(utilisateur);
+	}
+
 	public Utilisateur selectUtilisateurByIdUtilisateur(int idUtilisateur) throws BusinessException {
 		return utilisateurDAO.selectUtilisateurById(idUtilisateur);
 	}
@@ -27,16 +32,15 @@ public class UtilisateurManager {
 		return utilisateurDAO.getCommentairesByIdUtilisateur(idCommentaire);
 	}
 
-	public int getUtilisateur(String mail, String password) throws BusinessException
-	{
+	public int getUtilisateur(String mail, String password) throws BusinessException {
 		int idUtilisateur = -1;
 		idUtilisateur = utilisateurDAO.getIdUtilisateurByMailPassword(mail, password) == 0 ? idUtilisateur
 				: utilisateurDAO.getIdUtilisateurByMailPassword(mail, password);
 		return idUtilisateur;
 	}
 
-	public Utilisateur insert(String email, String motDePasse, String confirmation, String nom, String prenom) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Commentaire> getCommentairesByIdUtilisateur(int idUtilisateur) throws BusinessException {
+
+		return utilisateurDAO.getCommentairesByIdUtilisateur(idUtilisateur);
 	}
 }
