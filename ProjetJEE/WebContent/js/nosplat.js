@@ -117,10 +117,7 @@ function ajouterBaliseCom(data) {
         lienDelete = '<a href="#" onclick="supprimerCommentaire(' +
             data[j].id + '); return false;">' + txtLienDelete + '</a>';
 
-	var newCommentairecontent = newCommentairecontent + '</div>';
-	let avg = Math.round(100*sumNote / data.length)/100;
-	$("#noteAvg").append('Note moyenne : ' + avg + '/5');
-	$("#CommentaireCarousel").append(newCommentairecontent);
+
 
 
         var newCommentairecontent = newCommentairecontent +
