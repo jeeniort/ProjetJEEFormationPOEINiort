@@ -35,66 +35,6 @@ function AfficherFormNewCom(idPlat) {
 	
 }
 
-		    for(var i=0;i<listIngredientTab.length;i++)
-		    	{
-		    	listIngredientHTML = listIngredientHTML + '	<div class="col-12">'  +listIngredientTab[i] + '</div>';
-		    	}
-		   
-			
-			
-			var newContent = '<div class="col-md-12 note" id="card' + data.id + '">' +
-			'	<div class="card rounded border border-info">' +
-			'	<div class="card-header">' +
-			'	<h3><u>' + data.nom + '</u></h3>' +
-			'	<div class="col-12">'  + data.presentation + '</div>' +
-			'	<div class="col-10">Niveau '  + data.niveau + ' et '+data.cout + '. Pour '  + data.nbConvive + ' personnes.</div>' +
-			'	<p><u>Prix restaurant : ' + data.prix +' euros</u></p>' +
-			'	</div>' +
-			'	<div class="card-body">' +
-				listIngredientHTML +
-			'	</div>' +
-			'	<div class="card-footer">' +
-			'	</div>' +
-			'	</div>' +
-			'</div>';
-			$("#PlatCarousel").append(newContent);
-			   $("#nomPlat").empty();
-			   $("#nomPlat").append(data.nom);
-			   $("#nbCommande").empty();
-			   $("#nbCommande").append(data.nbCommande+ ' fois command&eacute;');
-			
-			
-			}
-		
-		
-		function ajouterBaliseCom(data) {
-			var newCommentairecontent = '';
-			var sumNote = 0;
-			   for(var j=0;j<data.length;j++)
-		    	{
-				   sumNote += data[j].note;	
-				   var dateCommentaire = data[j].date.dayOfMonth+'/'+data[j].date.monthValue+'/'+data[j].date.year+' '+data[j].date.hour+':'+data[j].date.minute;
-					   var newCommentairecontent = newCommentairecontent+'	<div class="col-md-5 offset-md-1 mb-2 ""><div class=" note" id="card' + data[j].id + '">' +
-					'	<div class="card rounded border border-info">' +
-					'	<div class="card-header  ">' +
-					'	<div class="row">'+
-					'	<div class="col-2">By : ' + data[j].utilisateur.nom + '</div>' +
-					'	<div class="col-2 offset-3"> Note : '  + data[j].note + '/5</div>' +
-					'	<div class="col-3 offset-2">'  + dateCommentaire + '</div>' +
-					'	</div></div>' +
-					'	<div class="card-body">' +
-					data[j].commentaire +
-					'	</div>' +
-					'	</div>' +
-					'</div>	</div>';
-		    	}
-			   
-			   
-			   var newCommentairecontent =  newCommentairecontent+'</div>';
-			   let avg = sumNote/data.length;
-			   $("#noteAvg").append('Note moyenne : '+avg+'/5');
-				$("#CommentaireCarousel").append(newCommentairecontent);
-
 function ajouterCommentaire(commentaire) {
 	$.ajax({
 		url : '/ServletMonCompte',
@@ -103,7 +43,6 @@ function ajouterCommentaire(commentaire) {
 			newNote :  commentaire.note.value,
 			idUtilisateur : $('#idUtilisateur').val(),
 			idPlat : $('#idPlat').val(),
-
 
 		},
 		success : function(responseText) {
@@ -159,13 +98,17 @@ function ajouterBaliseCom(data) {
 	var sumNote = 0;
 	for (var j = 0; j < data.length; j++) {
 		sumNote += data[j].note;
-		var dateCommentaire = data[j].date.dayOfMonth + '/'
-				+ data[j].date.monthValue + '/' + data[j].date.year + ' '
-				+ data[j].date.hour + ':' + data[j].date.minute;
+		var date = new Date(Date.UTC(data[j].date.year, data[j].date.monthValue, data[j].date.dayOfMonth, data[j].date.hour, data[j].date.minute, data[j].date.second));
+		options = {year: "numeric", month: "numeric", day: "numeric",
+		           hour: "numeric", minute: "numeric", second: "numeric",
+		           hour12: false};
+		var dateCommentaire = new Intl.DateTimeFormat('fr-FR',options).format(date);
+
+
 		var newCommentairecontent = newCommentairecontent
 				+ '	<div class="col-md-5 offset-md-1 mb-2"><div class=" note" id="card'
-				+ data[j].id + '">' + '	<div class="card">'
-				+ '	<div class="card-header  bg-info">' + '	<div class="row">'
+				+ data[j].id + '">' + '	<div class="rounded border border-info card">'
+				+ '	<div class="card-header ">' + '	<div class="row">'
 				+ '	<div class="col-2">By : ' + data[j].utilisateur.nom
 				+ '</div>' + '	<div class="col-2 offset-3"> Note : '
 				+ data[j].note + '/5</div>' + '	<div class="col-3 offset-2">'

@@ -74,8 +74,8 @@
 						%>
 						<div class="col-md-12 mb-2 mt-4">
 							<div class="note" id="card<%=commentaire.getId()%>">
-								<div class="card">
-									<div class="card-header  bg-info">
+								<div class="card rounded border border-info">
+									<div class="card-header ">
 										<div class="row">
 											<div class="col-2">
 												Note :
