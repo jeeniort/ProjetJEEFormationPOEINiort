@@ -17,10 +17,11 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 	// Requete SQL pour la method reqSql_getListeCommentaireByIdPlat
 	private static final String reqSql_getListeCommentaireByIdPlat = "SELECT c.id_commentaire,c.note,c.commentaire,c.date, "
 			+ "		p.id_plat, p.prix, p.nom, p.presentation, p.niveau, p.cout, p.nbconvive, p.nbcommande, p.listingredient, p.imageurl,"
-			+ "		u.id_utilisateur, u.nom, u.prenom, u.email,u.mdp, u.commentaire" + "	" + "		"
+			+ "		u.id_utilisateur, u.nom, u.prenom, u.email,u.mdp, u.commentaire"
 			+ "		FROM commentaire c "
 			+ "			inner join utilisateur u on u.id_utilisateur = c.id_utilisateur "
-			+ "			inner join plat p on p.id_plat = c.id_plat  " + "	" + "		WHERE c.id_plat =?";
+			+ "			inner join plat p on p.id_plat = c.id_plat  " 
+			+ "		WHERE c.id_plat =?";
 	// Requete SQL pour la method SelectALL
 	private static final String reqSql_selectAll = "SELECT id_plat,prix,nom,presentation,niveau,cout,nbconvive,nbcommande,listIngredient,imageURL FROM plat order by id_plat";
 	// Requete SQL pour la method reqSql_getPlatByIdPlat

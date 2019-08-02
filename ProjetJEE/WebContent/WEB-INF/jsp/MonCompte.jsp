@@ -20,7 +20,7 @@
 		<div class="row">
 			<div class="col-12">
 				<h1>Mon Compte</h1>
-				<div class="row">
+				<div class="row ml-4">
 					<div class="col-3">
 						<form action="ServletMonCompte" method="post">
 							<div class="form-group">

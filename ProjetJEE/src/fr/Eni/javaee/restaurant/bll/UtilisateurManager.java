@@ -43,4 +43,10 @@ public class UtilisateurManager {
 
 		return utilisateurDAO.getCommentairesByIdUtilisateur(idUtilisateur);
 	}
+	
+	public void selectRolesByIdUtilisateur(Utilisateur utilisateur) throws BusinessException{
+		utilisateurDAO.selectRolesByIdUtilisateur(utilisateur);
+		
+	}
+	
 }

@@ -63,12 +63,14 @@ public class ServletdeConnexion extends HttpServlet {
 		try {
 			int idUtilisateur = -1;
 			idUtilisateur = utilisateurmanager.getUtilisateur(mailAsString, mot_de_passeAsString);
+			System.out.println(mailAsString);
 			if (idUtilisateur == -1) {
 				String error = null;
 				// il ya erreur
 				error = "il y a une erreur";
 				request.setAttribute("error", error);
 				tentative++;
+
 				if (tentative == 3) {
 					tentative = 0;
 
@@ -76,15 +78,17 @@ public class ServletdeConnexion extends HttpServlet {
 
 					rd.forward(request, response);
 				} else {
-					RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
 					rd.forward(request, response);
 				}
+				;
 
 				// erreur
 			} else {
 
 				// ok
 				try {
+
 					// Création ou récuperation de session
 					HttpSession session = request.getSession();
 					// Mise en session d'une chaîne de caractère
