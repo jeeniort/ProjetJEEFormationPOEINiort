@@ -19,6 +19,11 @@ public class UtilisateurManager {
 		utilisateurDAO.insert(utilisateur);
 	}
 
+	public void update(Utilisateur utilisateur) throws BusinessException {
+		System.out.println("utilisateurDAO.update "+utilisateur.toString());
+		utilisateurDAO.update(utilisateur);
+	}
+
 	public Utilisateur selectUtilisateurByIdUtilisateur(int idUtilisateur) throws BusinessException {
 		return utilisateurDAO.selectUtilisateurById(idUtilisateur);
 	}

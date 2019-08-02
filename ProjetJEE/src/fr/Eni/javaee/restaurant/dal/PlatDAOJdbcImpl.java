@@ -115,7 +115,7 @@ public class PlatDAOJdbcImpl implements PlatDAO {
 					System.out.println("newPlat pour l'id " + idPlat + " : \n" + newPlat.toString());
 				}
 				Utilisateur newUtilisateur = new Utilisateur(rs.getInt(15), rs.getString(16), rs.getString(17),
-						rs.getString(18), rs.getString(19));
+						rs.getString(18), rs.getString(19),rs.getString(20));
 				System.out.println(
 						"newUtilisateur du commentaire pour l'id plat " + idPlat + " : \n" + newUtilisateur.toString());
 				listeCommentaires.add(new Commentaire(rs.getInt(1), rs.getInt(2), rs.getString(3), newUtilisateur,
