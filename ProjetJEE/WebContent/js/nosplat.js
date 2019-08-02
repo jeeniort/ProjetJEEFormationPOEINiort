@@ -110,8 +110,8 @@ function ajouterBaliseCom(data) {
 				+ data[j].id + '">' + '	<div class="rounded border border-info card">'
 				+ '	<div class="card-header ">' + '	<div class="row">'
 				+ '	<div class="col-2">By : ' + data[j].utilisateur.nom
-				+ '</div>' + '	<div class="col-2 offset-3"> Note : '
-				+ data[j].note + '/5</div>' + '	<div class="col-3 offset-2">'
+				+ '</div>' + '	<div class="col-2 offset-2"> Note : '
+				+ data[j].note + '/5</div>' + '	<div class="col-4 offset-2">'
 				+ dateCommentaire + '</div>' + '	</div></div>'
 				+ '	<div class="card-body">' + data[j].commentaire + '	</div>'
 				+ '	<div class="card-footer">' + '	</div>' + '	</div>'
