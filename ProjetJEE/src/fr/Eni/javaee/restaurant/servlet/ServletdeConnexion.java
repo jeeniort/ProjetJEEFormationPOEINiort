@@ -78,6 +78,9 @@ public class ServletdeConnexion extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("/ServletInscription");
 
 					rd.forward(request, response);
+				} else {
+					RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
+					rd.forward(request, response);
 				}
 				else{
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connexion.jsp");
